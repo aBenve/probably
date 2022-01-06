@@ -1,20 +1,18 @@
 <template>
-  <div class="container">Hola</div>
+  <Home/>
 </template>
 
 <script>
+import Home from "./Home";
 export default {
   name: "App",
-  components: {},
+  components: {Home},
 };
 </script>
 
 <style>
 #app {
   font-family: Poppins, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+
 }
 </style>
