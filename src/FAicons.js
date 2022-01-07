@@ -1,8 +1,9 @@
-import { faUser, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faBars, faTimes} from '@fortawesome/free-solid-svg-icons'
 
 const icons = {
     faUser,
-    faBars
+    faBars,
+    faTimes
 }
 
 export default icons;

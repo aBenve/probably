@@ -1,12 +1,7 @@
 <template>
   <div class="bg flex h-screen w-screen p-5 justify-between">
-    <div class="mr-5 flex">
+    <SidebarPanel/>
 
-      <div class="flex-row lg:hidden ">
-        <MenuIcon/>
-      </div>
-      <div class=" rounded-2xl p-5 sidebar hidden lg:flex text-white ">SIDEBAR</div>
-    </div>
     <div class="w-full flex flex-col lg:flex-row">
       <div class="rounded-2xl data p-5 mb-5 lg:mb-0 lg:mr-5  lg:w-4/6">
         DATA
@@ -17,11 +12,12 @@
 </template>
 
 <script>
-import MenuIcon from "./MenuIcon";
+import SidebarPanel from "./components/sidebar/SidebarPanel";
+
 
 export default {
   name: "Home",
-  components: {MenuIcon},
+  components: {SidebarPanel},
 
   methods:{
 
@@ -41,7 +37,4 @@ export default {
 .graph{
   background-color: #272A2E;
 }
-.sidebar{
-  width: 300px;
-  background-color: #272A2E;
-}</style>
+</style>
