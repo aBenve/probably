@@ -3,9 +3,7 @@
     <SidebarPanel/>
 
     <div class="w-full flex flex-col lg:flex-row">
-      <div class="rounded-2xl data p-5 mb-5 lg:mb-0 lg:mr-5  lg:w-4/6">
-        DATA
-      </div>
+      <DataArea/>
       <div class="rounded-2xl graph p-5  w-full w-full">GRAFICO</div>
     </div>
   </div>
@@ -13,11 +11,12 @@
 
 <script>
 import SidebarPanel from "./components/sidebar/SidebarPanel";
+import DataArea from "./components/DataArea";
 
 
 export default {
   name: "Home",
-  components: {SidebarPanel},
+  components: {DataArea, SidebarPanel},
 
   methods:{
 

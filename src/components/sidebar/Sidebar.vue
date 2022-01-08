@@ -5,8 +5,8 @@
             <div class="flex justify-between flex-row items-center mb-10">
               probab logo
             </div>
-            <DiscreteDropDownButton/>
-            <ContinuousDropDownButton/>
+            <my-dropdown name="Discrete"/>
+            <my-dropdown name="Continuous"/>
 
           </div>
           <div class="text-white">
@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import DiscreteDropDownButton from "../DiscreteDropDownButton";
-import ContinuousDropDownButton from "../ContinuousDropDownButton";
+
+import MyDropdown from "../myDropdown";
 
 export default {
   name: "Sidebar",
-  components: {ContinuousDropDownButton, DiscreteDropDownButton},
+  components: {MyDropdown},
 
 }
 </script>

@@ -16,8 +16,9 @@
               <fa icon="times" @click="closeSidebar"/>
             </div>
           </div>
-          <DiscreteDropDownButton/>
-          <ContinuousDropDownButton/>
+
+          <myDropdown name="Discrete"/>
+          <myDropdown name="Continuous"/>
 
         </div>
         <div class="text-white">
@@ -30,14 +31,13 @@
 
 </template>
 <script>
-import DiscreteDropDownButton from "./DiscreteDropDownButton";
-import ContinuousDropDownButton from "./ContinuousDropDownButton";
+import myDropdown from "./myDropdown";
 
 export default {
   name: 'MenuIcon',
-  components: {ContinuousDropDownButton, DiscreteDropDownButton},
+  components: {myDropdown},
   data: () => ({
-    isSidebarOn: window.innerWidth >= 1024,
+    isSidebarOn: false,
 
   }),
   methods: {
