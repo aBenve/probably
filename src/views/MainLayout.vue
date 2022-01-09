@@ -1,26 +1,20 @@
 <template>
   <div class="bg flex h-screen w-screen p-5 justify-between">
     <SidebarPanel/>
-
     <div class="w-full flex flex-col lg:flex-row">
-      <DataArea/>
-      <div class="rounded-2xl graph p-5  w-full w-full">GRAFICO</div>
+      <router-view/>
     </div>
   </div>
 </template>
 
 <script>
-import SidebarPanel from "./components/sidebar/SidebarPanel";
-import DataArea from "./components/DataArea";
+
+import SidebarPanel from "../components/sidebar/SidebarPanel";
 
 
 export default {
-  name: "Home",
-  components: {DataArea, SidebarPanel},
-
-  methods:{
-
-  }
+  name: "MainLayout",
+  components:{SidebarPanel}
 }
 </script>
 

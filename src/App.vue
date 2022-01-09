@@ -1,15 +1,23 @@
 <template>
-  <Home/>
+  <MainLayout/>
 </template>
 
 <script>
-import Home from "./Home";
+/*
+  Por alguna reazon no me quiere tomar bien las rutas. Ya estan siendo dinamicas, falta que para cada boton distinto pueda llegar al objeto completo del otro lado.
+ */
+
+
+
+import MainLayout from "./views/MainLayout";
 export default {
   name: "App",
-  components: {Home},
+  components: {MainLayout},
 
 };
 </script>
+
+
 
 <style>
 #app {

@@ -6,7 +6,9 @@
     <transition name="slideBottom">
       <div  v-if="toggle" >
         <div class="mb-2 hover:bg-gray-500  rounded-2xl p-2 font-medium transition duration-75 ease-in" v-for="option in menu" :key="option">
-          {{ option.name }}
+          <router-link  class="flex align-middle justify-center" :to="option.name">
+            {{ option.name }}
+          </router-link>
         </div>
       </div>
     </transition>
@@ -30,8 +32,7 @@ export default {
     menu: function (){
       return userData.filter(obj => obj.type === this.name)
     }
-  }
-
+  },
 }
 </script>
 <style scoped>
