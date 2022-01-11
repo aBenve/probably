@@ -24,13 +24,11 @@ const router = createRouter(
                     }
                     next({name: "404Page"})
                 }
-                //todo: necesrio checkear si la opcion que se mando es valida, sino mandar a pagina 404
             },
             {
                 path: '/notFound',
                 name:'404Page',
                 component: () => import(/* webpackChunkName: "Landing" */ '../views/Page404'),
-                //todo: necesrio checkear si la opcion que se mando es valida, sino mandar a pagina 404
             },
         ]
     }
