@@ -20,6 +20,9 @@
         :top-add="secondTopAdd"
         :small-add="secondSmallAdd"
         :small-subs="secondSmallSubs"
+
+        @value-changed="reSendEvent"
+
     />
   </div>
 </template>
@@ -58,7 +61,11 @@ export default {
   components:{mySliderInput},
   methods:{
     updateValue(val){
-      this.maxSecondSlider = val
+      this.$emit('value-changed', [val.pop(), -1])
+      this.maxSecondSlider = val.pop()
+    },
+    reSendEvent(prop){
+      this.$emit('value-changed', [-1,prop.pop()] )
     }
   }
 }

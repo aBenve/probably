@@ -13,6 +13,8 @@
 
         :style="accentColor"
 
+        @value-changed="valueChanged"
+
       />
     </div>
 
@@ -37,6 +39,8 @@
           :style="accentColor"
 
           :related-sliders="distribution.related"
+
+          @value-changed="valueChanged"
 
       />
     </div>
@@ -71,16 +75,25 @@
 import DoubleSlider from "./DoubleSlider";
 import MySliderInput from "./MySliderInput";
 import TripleSlider from "./TripleSlider";
+import {mapGetters} from "vuex";
 
 export default {
   name: "DataArea",
   components: {MySliderInput, DoubleSlider, TripleSlider},
 
-  props:{
-    distribution: Object
+  methods:{
+    valueChanged: function (a){
+      this.$emit('value-changed', a)
+    },
   },
 
   computed:{
+
+    ...mapGetters({
+        distribution: 'getCurrentOption'
+    }),
+
+
 
     accentColor(){
       return{

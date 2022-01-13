@@ -68,7 +68,7 @@ export default {
 
   watch: {
     value: function() {
-      this.$emit("value-changed", this.value)
+      this.$emit("value-changed", [this.value.valueOf()])
     },
     maxValue: function (){
       if(this.value > this.maxValue)
