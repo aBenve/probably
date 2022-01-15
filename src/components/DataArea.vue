@@ -4,7 +4,7 @@
     <div v-if="distribution.inputs.length === 1">
       <MySliderInput
         :label="distribution.inputs[0].label"
-        :max-value="distribution.inputs[0].step === 1 ? 9999 : 1"
+        :max-value="distribution.inputs[0].step === 1 ? 500 : 1"
         :step="distribution.inputs[0].step"
         :top-add="distribution.inputs[0].step * 5"
         :small-add="distribution.inputs[0].step"
@@ -21,14 +21,14 @@
     <div v-else-if="distribution.inputs.length === 2">
       <DoubleSlider
           :first-label="distribution.inputs[0].label"
-          :first-max-value="distribution.inputs[0].step === 1 ? 9999 : 1"
+          :first-max-value="distribution.inputs[0].step === 1 ? 500 : 1"
           :first-step="distribution.inputs[0].step"
           :first-top-add="distribution.inputs[0].step * 5"
           :first-small-add="distribution.inputs[0].step"
           :first-top-subs="distribution.inputs[0].step * 5"
           :first-small-subs="distribution.inputs[0].step"
 
-          :second-max-value="distribution.inputs[1].step === 1 ? 9999 : 1"
+          :second-max-value="distribution.inputs[1].step === 1 ? 500 : 1"
           :second-label="distribution.inputs[1].label"
           :second-step="distribution.inputs[1].step"
           :second-top-add="distribution.inputs[1].step * 5"
@@ -48,7 +48,7 @@
     <div v-else-if="distribution.inputs.length === 3">
       <TripleSlider
           :first-label="distribution.inputs[0].label"
-          :max-value="distribution.inputs[0].step === 1 ? 9999 : 1"
+          :max-value="distribution.inputs[0].step === 1 ? 500 : 1"
           :first-step="distribution.inputs[0].step"
           :first-top-add="distribution.inputs[0].step * 5"
           :first-small-add="distribution.inputs[0].step"

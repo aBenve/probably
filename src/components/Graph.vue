@@ -2,7 +2,7 @@
   {{distribution.name}}
   {{distribution.inputs[0].value}}
   <div >
-    <myChart :data="test"/>
+    <myChart :chartData="chartData" :labels="chartLabels" :color="distribution.color"/>
   </div>
 </template>
 
@@ -11,19 +11,47 @@ import {mapGetters} from "vuex";
 import myChart from "./myChart";
 export default {
   name: "Graph",
-  components:{myChart},
+  components:{ myChart},
   data:() => ({
-    test:[5,2,3,4,5],
+    labels:[1,2,3,4,5],
+    data:[1,2,3,4,5]
+
   }),
   computed: {
     ...mapGetters({
-      distribution: 'getCurrentOption'
+      distribution: 'getCurrentOption',
+      lowerValue: 'getLowerValue',
+      upperValue: 'getUpperValue',
+      inputs: 'getInputsValues'
     }),
 
-    data:function (){
-      return []
+    chartData: function (){
+      let toRet = []
+      if(this.chartLabels === 0)
+        return 0
+      this.chartLabels.forEach(num => toRet.push(this.distribution.P(this.inputs,num)))
+      return toRet
     },
 
+    chartLabels: function() {
+      console.log(this.lowerValue)
+      console.log(this.upperValue)
+      console.log(this.inputs)
+
+      if(this.inputs === -1)
+        return 0
+
+      let arr = []
+      if(!(this.lowerValue === 0))
+        arr = [this.lowerValue]
+      let aux = [...Array(this.upperValue - this.lowerValue).keys()]
+      arr.push(aux)
+      arr = arr.flat()
+
+      arr.push(this.upperValue)
+
+      return arr
+    }
   },
 }
 </script>

@@ -1,40 +1,43 @@
 <template>
-  <BarChart  :chartData="testData" />
+  {{distribution.inputs[0].value}}
+  <BarChart  :chartData="testData"  />
 </template>
 <script>
-import {defineComponent, watchEffect} from 'vue';
-
+import {computed, defineComponent} from 'vue';
 import {BarChart } from 'vue-chart-3'
 import { Chart, BarController, CategoryScale, LinearScale, BarElement } from 'chart.js'
+import {mapGetters} from "vuex";
 
 
 export default defineComponent({
   name: "myChart",
   components:{BarChart },
   props:{
-    data:Array
+    labels:Array,
+    chartData:Array,
+    color:String
   },
+  computed: {
+    ...mapGetters({
+      distribution: 'getCurrentOption'
+    }),
+
+  },
+
   setup(props) {
 
     Chart.register(BarController, CategoryScale, LinearScale, BarElement)
 
-    let myProp
-
-    watchEffect(() => {
-      myProp = props.data
-    })
-
-    const testData = {
-      labels: ['Paris', 'Nîmes', 'Toulon', 'Perpignan', 'Autre'],
+    const testData = computed(() => ({
+      labels: props.labels,
       datasets: [
         {
-          data: myProp,
-          backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
+          data: props.chartData,
+          backgroundColor: props.color,
         },
       ],
-    };
-
-    return { testData };
+    }))
+    return {testData}
   },
 })
 </script>

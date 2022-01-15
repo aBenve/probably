@@ -28,18 +28,40 @@ const store = createStore({
         getPValue(state, inputs){
           return state.currentOption.P(inputs)
         },
-        getMean(state){return state.mean},
-        getSD(state){return state.sd},
-        getVariance(state){return state.variance},
+        getMean(state, getters){return state.currentOption.mean(getters.getInputsValues)},
+        getSD(state, getters){return state.currentOption.sd(getters.getInputsValues)},
+        getVariance(state, getters){return state.currentOption.variance(getters.getInputsValues)},
 
-        getLowerValue(){return this.getMean() - 6 * this.getSD()},
-        getUpperValue(){return this.getMean() + 6 * this.getSD()},
+        getLowerValue(state, getters){
+            return Math.floor(getters.getMean - 6 * getters.getSD > 0 ? getters.getMean - 6 * getters.getSD : 0)
+        },
+        getUpperValue(state, getters){
+            if(state.currentOption.name === 'Binomial' && state.currentOption.inputs[0].value < 10)
+                return state.currentOption.inputs[0].value // todo: esto estaba +1 pero se pasa del n y da error la combinatoria
+            return Math.floor(getters.getMean + 6 * getters.getSD)
+        },
 
         getInputsValues(state){
+
+            let zero = false;
+            /*
+
+            for(let i = 0 ; i < state.currentOption.inputs.length ; i++)
+            {
+                if(state.currentOption.inputs[i].value === 0)
+                    zero = true
+            }
+             */
+            state.currentOption.inputs.forEach(num => num.value === 0 ? zero = true : '')
+            if(zero)
+                return -1
             let toRet = []
             state.currentOption.inputs.forEach(inp => toRet.push(inp.value))
             return toRet
         }
+
+
+
     },
     modules:{}
 })

@@ -10,8 +10,10 @@ let generalSD = (variance) => {
 let BinomialMean = (inputs) => {
     return inputs[0] * inputs[1]
 }
+
+
 let BinomialVariance = (inputs) => {
-    return inputs[0] * inputs[1] (1 - inputs[1])
+    return inputs[0] * inputs[1] * (1 - inputs[1])
 }
 let GeometricMean = (inputs) => {
     return 1/inputs[0]
@@ -42,9 +44,9 @@ const userOptions = [
     {
         name: "Binomial",
 
-        mean:(inputs) => {BinomialMean(inputs)},
-        variance:(inputs) => {BinomialVariance(inputs)},
-        sd:(inputs) => {generalSD(BinomialVariance(inputs))},
+        mean:(inputs) => {return BinomialMean(inputs)},
+        variance:(inputs) => {return BinomialVariance(inputs)},
+        sd:(inputs) => {return generalSD(BinomialVariance(inputs))},
 
         P:(inputs, x) => {
             return  combinations(inputs[0], x) * Math.pow(inputs[1], x) * Math.pow((1-inputs[1]), (inputs[0] - x))
