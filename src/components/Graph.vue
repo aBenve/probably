@@ -1,30 +1,29 @@
 <template>
   {{distribution.name}}
-  <div class="bg-pink-200" @click="test">
-    <div v-for="input in distribution.inputs" :key="input.label">
-      {{ input.value }}
-    </div>
-    <div class="bg-blue-500">
-      {{ distribution.P(100,0.7,50) }}
-    </div>
+  {{distribution.inputs[0].value}}
+  <div >
+    <myChart :data="test"/>
   </div>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
-
+import myChart from "./myChart";
 export default {
   name: "Graph",
+  components:{myChart},
+  data:() => ({
+    test:[5,2,3,4,5],
+  }),
   computed: {
-
     ...mapGetters({
       distribution: 'getCurrentOption'
     }),
-  },
-    methods:{
-    test: function (){
-      console.log(this.distribution)
-    }
+
+    data:function (){
+      return []
+    },
+
   },
 }
 </script>

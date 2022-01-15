@@ -1,24 +1,57 @@
 
 //todo: we may add the E(x), v(x) as parameters too
 
-import {combinations} from 'mathjs'
+import {combinations, factorial} from 'mathjs'
+
+let generalSD = (variance) => {
+    return Math.sqrt(variance)
+}
+
+let BinomialMean = (inputs) => {
+    return inputs[0] * inputs[1]
+}
+let BinomialVariance = (inputs) => {
+    return inputs[0] * inputs[1] (1 - inputs[1])
+}
+let GeometricMean = (inputs) => {
+    return 1/inputs[0]
+}
+let GeometricVariance = (inputs) => {
+    return (1-inputs[0]) / Math.pow(inputs[0], 2)
+}
+/*
+    0 -> n
+    1 -> M
+    2 -> N
+ */
+let HypergeometricMean = (inputs) => {
+    return inputs[0] * inputs[1] / inputs[2]
+}
+let HypergeometricVariance = (inputs) => {
+    return inputs[0] * inputs[1] / inputs[2] * (1- inputs[1]/inputs[2])*(inputs[2]-inputs[0])/(inputs[2]-1)
+}
+let PoissonMean = (inputs) => {
+    return inputs[0]
+}
+let PoissonVariance = (inputs) => {
+    return inputs[0]
+}
+
 
 const userOptions = [
     {
         name: "Binomial",
 
-        mean:0,
-        variance:0,
-        sd:0,
+        mean:(inputs) => {BinomialMean(inputs)},
+        variance:(inputs) => {BinomialVariance(inputs)},
+        sd:(inputs) => {generalSD(BinomialVariance(inputs))},
 
-        P:(n, p, x) => {
-            return  combinations(n, x) * Math.pow(p, x) * Math.pow((1-p), (n - x))
+        P:(inputs, x) => {
+            return  combinations(inputs[0], x) * Math.pow(inputs[1], x) * Math.pow((1-inputs[1]), (inputs[0] - x))
         },
 
         color:"#A594FE",
         accentColor:"#8067FE",
-
-
 
         type: "Discrete",
         related: false,
@@ -28,12 +61,12 @@ const userOptions = [
     {
         name: "Geometric",
 
-        mean:0,
-        variance:0,
-        sd:0,
+        mean:(inputs) => {GeometricMean(inputs)},
+        variance:(inputs) => {GeometricVariance(inputs)},
+        sd:(inputs) => {generalSD(GeometricVariance(inputs))},
 
-        P:(n, p, x) => {
-            return  combinations(n, x) * Math.pow(p, x) * Math.pow((1-p), (n - x))
+        P:(inputs, x) => {
+            return  inputs[0] * Math.pow(1 - inputs[0], x - 1)
         },
 
         color:"#F694FE",
@@ -46,12 +79,12 @@ const userOptions = [
     {
         name: "Hypergeometric",
 
-        mean:0,
-        variance:0,
-        sd:0,
+        mean:(inputs) => {HypergeometricMean(inputs)},
+        variance:(inputs) => {HypergeometricVariance(inputs)},
+        sd:(inputs) => {generalSD(HypergeometricVariance(inputs))},
 
-        P:(n, p, x) => {
-            return  combinations(n, x) * Math.pow(p, x) * Math.pow((1-p), (n - x))
+        P:(inputs, x) => {
+            return (combinations(inputs[1], x) * combinations(inputs[2] - inputs[1], inputs[2]-x)/combinations(inputs[2],inputs[0]))
         },
 
         color:"#FE9494",
@@ -64,12 +97,12 @@ const userOptions = [
     {
         name: "Poisson",
 
-        mean:0,
-        variance:0,
-        sd:0,
+        mean:(inputs) => {PoissonMean(inputs)},
+        variance:(inputs) => {PoissonVariance(inputs)},
+        sd:(inputs) => {generalSD(PoissonVariance(inputs))},
 
-        P:(n, p, x) => {
-            return  combinations(n, x) * Math.pow(p, x) * Math.pow((1-p), (n - x))
+        P:(inputs, x) => {
+            return  Math.exp(-inputs[0]) * Math.pow(inputs[0], x) / factorial(x)
         },
 
         color:"#FEDA94",
@@ -82,9 +115,9 @@ const userOptions = [
     {
         name: "Uniform",
 
-        mean:0,
-        variance:0,
-        sd:0,
+        mean:(inputs) => {return inputs[0] * inputs[1]},
+        variance:(inputs) => {return inputs[0] * inputs[1] (1 - inputs[1])},
+        sd:(inputs) => {return Math.sqrt(inputs[0] * inputs[1] (1 - inputs[1]))},
 
         P:(n, p, x) => {
             return  combinations(n, x) * Math.pow(p, x) * Math.pow((1-p), (n - x))
@@ -100,9 +133,9 @@ const userOptions = [
     {
         name: "Exponential",
 
-        mean:0,
-        variance:0,
-        sd:0,
+        mean:(inputs) => {return inputs[0] * inputs[1]},
+        variance:(inputs) => {return inputs[0] * inputs[1] (1 - inputs[1])},
+        sd:(inputs) => {return Math.sqrt(inputs[0] * inputs[1] (1 - inputs[1]))},
 
         P:(n, p, x) => {
             return  combinations(n, x) * Math.pow(p, x) * Math.pow((1-p), (n - x))
@@ -118,9 +151,9 @@ const userOptions = [
     {
         name: "Normal",
 
-        mean:0,
-        variance:0,
-        sd:0,
+        mean:(inputs) => {return inputs[0] * inputs[1]},
+        variance:(inputs) => {return inputs[0] * inputs[1] (1 - inputs[1])},
+        sd:(inputs) => {return Math.sqrt(inputs[0] * inputs[1] (1 - inputs[1]))},
 
         P:(n, p, x) => {
             return  combinations(n, x) * Math.pow(p, x) * Math.pow((1-p), (n - x))
@@ -136,9 +169,9 @@ const userOptions = [
     {
         name: "Log-Normal",
 
-        mean:0,
-        variance:0,
-        sd:0,
+        mean:(inputs) => {return inputs[0] * inputs[1]},
+        variance:(inputs) => {return inputs[0] * inputs[1] (1 - inputs[1])},
+        sd:(inputs) => {return Math.sqrt(inputs[0] * inputs[1] (1 - inputs[1]))},
 
         P:(n, p, x) => {
             return  combinations(n, x) * Math.pow(p, x) * Math.pow((1-p), (n - x))
@@ -154,9 +187,9 @@ const userOptions = [
     {
         name: "t",
 
-        mean:0,
-        variance:0,
-        sd:0,
+        mean:(inputs) => {return inputs[0] * inputs[1]},
+        variance:(inputs) => {return inputs[0] * inputs[1] (1 - inputs[1])},
+        sd:(inputs) => {return Math.sqrt(inputs[0] * inputs[1] (1 - inputs[1]))},
 
         P:(n, p, x) => {
             return  combinations(n, x) * Math.pow(p, x) * Math.pow((1-p), (n - x))

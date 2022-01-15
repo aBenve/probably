@@ -1,8 +1,8 @@
 <template>
   <div class="w-full flex flex-col lg:flex-row">
-    <DataArea :distribution="clearInputsData" @value-changed="this.updateInputs"/>
+    <DataArea :distribution="distribution" @value-changed="this.updateInputs"/>
     <div class="rounded-2xl graph p-5  w-full w-full">
-      <Graph :distribution="clearInputsData" />
+      <Graph />
     </div>
   </div>
 </template>
@@ -26,20 +26,9 @@ export default {
 
     distribution: function(){
       let op = optionsInfo.filter(obj => obj.name === this.$route.params.id).pop()
-      console.log(op)
       this.setCurrentOption(op)
       return this.getCurrentOption
     },
-
-    clearInputsData: function (){
-      let clear = []
-      for(let i = 0 ; i < this.distribution.inputs.length ; i++)
-        clear[i] = 0
-      this.updateInputs(clear)
-
-      return this.distribution
-
-    }
   },
 
   methods:{

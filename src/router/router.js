@@ -18,7 +18,7 @@ const router = createRouter(
                 component: () => import(/* webpackChunkName: "Landing" */ '../views/WorkingOption'),
                 beforeEnter: (to, from, next) => {
                     // antes de entrar, verifico si es uno de las opciones posibles, sino se rechaza.
-                    if (optionsInfo.find(obj => obj.name === to.params.id) !== undefined){
+                    if ( optionsInfo.find(obj => obj.name === to.params.id) !== undefined){
                         next()
                         return true
                     }
