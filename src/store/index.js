@@ -36,8 +36,11 @@ const store = createStore({
             return Math.floor(getters.getMean - 6 * getters.getSD > 0 ? getters.getMean - 6 * getters.getSD : 0)
         },
         getUpperValue(state, getters){
-            if(state.currentOption.name === 'Binomial' && state.currentOption.inputs[0].value < 10)
-                return state.currentOption.inputs[0].value // todo: esto estaba +1 pero se pasa del n y da error la combinatoria
+            if(state.currentOption.name === 'Binomial' ){
+                if( state.currentOption.inputs[0].value < 10)
+                    return state.currentOption.inputs[0].value
+                return Math.min(state.currentOption.inputs[0].value, Math.floor(getters.getMean + 6 * getters.getSD))
+            }
             return Math.floor(getters.getMean + 6 * getters.getSD)
         },
 

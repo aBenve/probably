@@ -44,7 +44,11 @@ export default {
       let arr = []
       if(!(this.lowerValue === 0))
         arr = [this.lowerValue]
-      let aux = [...Array(this.upperValue - this.lowerValue).keys()]
+
+      let aux = []
+      for(let i = this.lowerValue ; i < this.upperValue; i++)
+        aux.push(i)
+
       arr.push(aux)
       arr = arr.flat()
 
