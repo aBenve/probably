@@ -1,4 +1,10 @@
+Hi there i'm aBenve and this is my first webPage.
+
 # probab
+
+probab is a project to help users to understand more completely some probability distributions and to play with them. 
+The objective of this web is to practice my vue skills and web design-developing. Hopefully this could be useful one day.
+
 
 ## Project setup
 ```
@@ -9,16 +15,3 @@ npm install
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
