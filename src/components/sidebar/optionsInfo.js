@@ -10,16 +10,34 @@ let generalSD = (variance) => {
 let BinomialMean = (inputs) => {
     return inputs[0] * inputs[1]
 }
-
-
 let BinomialVariance = (inputs) => {
     return inputs[0] * inputs[1] * (1 - inputs[1])
 }
+let BinomialLowerValue = (inputs) => {
+    let mean = BinomialMean(inputs)
+    let sd = generalSD(BinomialVariance(inputs))
+    return Math.floor( mean - 6 * sd > 0 ? mean - 6 *  sd : 0)
+}
+let BinomialUpperValue = (inputs) => {
+    return inputs[0] < 10 ? inputs[0] : Math.min(inputs[0], Math.floor(BinomialMean(inputs) + 6 *generalSD(BinomialVariance(inputs))))
+}
+
 let GeometricMean = (inputs) => {
     return 1/inputs[0]
 }
 let GeometricVariance = (inputs) => {
     return (1-inputs[0]) / Math.pow(inputs[0], 2)
+}
+
+let GeometricLowerValue = (inputs) => {
+    return Math.max(1, GeometricMean(inputs) - 5 * generalSD(GeometricVariance(inputs)))
+}
+
+let GeometricUpperValue = (inputs) => {
+    let lower = GeometricLowerValue(inputs)
+    let toRet = Math.ceil(GeometricMean(inputs) + 5 * generalSD(GeometricVariance(inputs)))
+    if(toRet - lower < 4) return lower + 4
+    return toRet
 }
 /*
     0 -> n
@@ -40,6 +58,12 @@ let PoissonVariance = (inputs) => {
 }
 
 
+
+/*
+    TODO: Quiza lo mejor sea ubicar el lower y el upper aca, ya que cada distro es diferente.
+ */
+
+
 const userOptions = [
     {
         name: "Binomial",
@@ -47,6 +71,9 @@ const userOptions = [
         mean:(inputs) => {return BinomialMean(inputs)},
         variance:(inputs) => {return BinomialVariance(inputs)},
         sd:(inputs) => {return generalSD(BinomialVariance(inputs))},
+
+        lowerValue:(inputs) => { return BinomialLowerValue(inputs)},
+        upperValue:(inputs) => { return BinomialUpperValue(inputs)},
 
         P:(inputs, x) => {
             return  combinations(inputs[0], x) * Math.pow(inputs[1], x) * Math.pow((1-inputs[1]), (inputs[0] - x))
@@ -66,6 +93,9 @@ const userOptions = [
         mean:(inputs) => {GeometricMean(inputs)},
         variance:(inputs) => {GeometricVariance(inputs)},
         sd:(inputs) => {generalSD(GeometricVariance(inputs))},
+
+        lowerValue:(inputs) => { return GeometricLowerValue(inputs)},
+        upperValue:(inputs) => { return GeometricUpperValue(inputs)},
 
         P:(inputs, x) => {
             return  inputs[0] * Math.pow(1 - inputs[0], x - 1)
