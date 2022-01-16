@@ -16,10 +16,10 @@
          <button @click="increaseValue(smallAdd)" class="mr-5 change-value-buttons">
           +{{smallAdd}}
         </button>
-        <button @click="deincreaseValue(smallSubs)" class="mr-5 change-value-buttons">
+        <button @click="decreaseValue(smallSubs)" class="mr-5 change-value-buttons">
           -{{smallSubs}}
         </button>
-        <button @click="deincreaseValue(topSubs)" class="change-value-buttons">
+        <button @click="decreaseValue(topSubs)" class="change-value-buttons">
           -{{topSubs}}
         </button>
       </span>
@@ -57,7 +57,7 @@ export default {
         return
       this.value += n.valueOf()
     },
-    deincreaseValue(n){
+    decreaseValue(n){
       if(this.value === "0")
         this.value = 0
       if(this.value.valueOf() - n.valueOf() < 0)

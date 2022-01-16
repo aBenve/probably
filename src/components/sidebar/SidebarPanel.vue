@@ -22,7 +22,7 @@ export default {
 
 <style scoped>
 .sidebar{
-  width: 20rem;
+  width: 15rem;
   background-color: #272A2E;
 }
 </style>
