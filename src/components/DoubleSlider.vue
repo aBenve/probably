@@ -1,6 +1,7 @@
 <template>
   <div class="mt-5">
     <mySliderInput
+
         :label="firstLabel"
         :maxValue="firstMaxValue"
         :step="firstStep"
@@ -13,6 +14,8 @@
 
     />
     <mySliderInput
+
+
         :label="secondLabel"
         :maxValue="relatedSliders ? maxSecondSlider:secondMaxValue"
         :step="secondStep"

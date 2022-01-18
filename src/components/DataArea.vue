@@ -1,11 +1,12 @@
 <template>
-  <div class="rounded-2xl p-5 mb-5 lg:mb-0 lg:mr-5 lg:w-4/6 text-2xl flex flex-col " >
+  <div class="rounded-2xl p-0 lg:p-5 mb-5 lg:mb-0 lg:mr-5 lg:w-4/6 text-2xl flex flex-col " >
     <div class="text-white font-bold">
-      <div class="mb-10">
+      <div class="mb-10 text-4xl" :style="{color:distribution.color} ">
         {{ distribution.name }}
       </div>
       <div v-if="distribution.inputs.length === 1">
         <MySliderInput
+
           :label="distribution.inputs[0].label"
           :max-value="distribution.inputs[0].max"
           :step="distribution.inputs[0].step"
@@ -110,5 +111,4 @@ export default {
 .data{
   background-color: #272A2E;
 }
-
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div class="bg flex h-screen w-screen p-5 justify-between">
+  <div class="bg flex h-screen w-screen p-5 justify-between overflow-auto">
     <SidebarPanel/>
-    <div class="w-full flex flex-col lg:flex-row">
+    <div class="w-full h-full flex flex-col lg:flex-row">
       <router-view/>
     </div>
   </div>
@@ -22,12 +22,5 @@ export default {
 
 .bg{
   background-color: #2F3339;
-}
-.data{
-  background-color: #272A2E;
-
-}
-.graph{
-  background-color: #272A2E;
 }
 </style>

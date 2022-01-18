@@ -31,30 +31,12 @@ const store = createStore({
         getMean(state, getters){return state.currentOption.mean(getters.getInputsValues)},
         getSD(state, getters){return state.currentOption.sd(getters.getInputsValues)},
         getVariance(state, getters){return state.currentOption.variance(getters.getInputsValues)},
-
-        getLowerValue(state, getters){
-            return Math.floor(getters.getMean - 6 * getters.getSD > 0 ? getters.getMean - 6 * getters.getSD : 0)
-        },
-        getUpperValue(state, getters){
-            if(state.currentOption.name === 'Binomial' ){
-                if( state.currentOption.inputs[0].value < 10)
-                    return state.currentOption.inputs[0].value
-                return Math.min(state.currentOption.inputs[0].value, Math.floor(getters.getMean + 6 * getters.getSD))
-            }
-            return Math.floor(getters.getMean + 6 * getters.getSD)
-        },
+        getDistroType(state){return state.currentOption.type},
 
         getInputsValues(state){
 
             let zero = false;
-            /*
 
-            for(let i = 0 ; i < state.currentOption.inputs.length ; i++)
-            {
-                if(state.currentOption.inputs[i].value === 0)
-                    zero = true
-            }
-             */
             state.currentOption.inputs.forEach(num => num.value === 0 ? zero = true : '')
             if(zero)
                 return -1

@@ -1,7 +1,4 @@
 <template>
-  {{ distribution.name }}
-
-  {{ distribution.inputs[0].value }}
   <div>
     <myChart
       :chartData="chartData"

@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex flex-col lg:flex-row">
     <DataArea :distribution="distribution" @value-changed="this.updateInputs"/>
-    <div class="rounded-2xl graph p-5  w-full w-full">
+    <div class="rounded-2xl graph p-5 mb-10 lg:mb-0 w-full w-full">
       <Graph />
     </div>
   </div>

@@ -3,11 +3,6 @@
 </template>
 
 <script>
-/*
-  Por alguna reazon no me quiere tomar bien las rutas. Ya estan siendo dinamicas, falta que para cada boton distinto pueda llegar al objeto completo del otro lado.
- */
-
-
 
 import MainLayout from "./views/MainLayout";
 export default {
@@ -17,12 +12,20 @@ export default {
 };
 </script>
 
-
-
 <style>
+
+:root{
+  --gray-bg:#2f3339;
+  --black-principal:#272a2e;
+
+  --text-gray:#939AAB;
+  --lightest-gray:#ECECEC;
+}
+
 #app {
   font-family: Poppins, Helvetica, Arial, sans-serif;
-
+  width: 100%;
+  height: 100%;
 }
 html {
   overflow-x: hidden;

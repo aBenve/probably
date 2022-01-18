@@ -1,5 +1,4 @@
 <template>
-  {{distribution.inputs[0].value}}
   <BarChart  :chartData="testData" :options="options" />
 </template>
 <script>

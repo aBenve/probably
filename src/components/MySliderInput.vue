@@ -43,7 +43,6 @@ export default {
     smallAdd: Number,
     topSubs:Number,
     smallSubs:Number,
-
     color:String,
 
   },
@@ -73,6 +72,9 @@ export default {
     maxValue: function (){
       if(this.value > this.maxValue)
         this.value = this.maxValue
+    },
+    prevValue: function (){
+      return this.value = this.prevValue
     }
   }
 }
