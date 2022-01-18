@@ -63,14 +63,14 @@ let HypereometricUpperValue = (inputs) => {
 }
 
 let PoissonMean = (inputs) => {
-    return Math.floor(inputs[0])
+    return parseFloat(inputs[0])
 }
 let PoissonVariance = (inputs) => {
-    return Math.floor(inputs[0])
+    return parseFloat(inputs[0])
 }
 
 let PoissonLowerValue = (inputs) => {
-    return Math.floor(Math.max(1, PoissonMean(inputs) - 4 * generalSD(PoissonVariance(inputs))))
+    return parseFloat(Math.max(1, PoissonMean(inputs) - 4 * generalSD(PoissonVariance(inputs))))
 }
 
 let PoissonUpperValue = (inputs) => {
@@ -115,9 +115,9 @@ const userOptions = [
     {
         name: "Geometric",
 
-        mean:(inputs) => {GeometricMean(inputs)},
-        variance:(inputs) => {GeometricVariance(inputs)},
-        sd:(inputs) => {generalSD(GeometricVariance(inputs))},
+        mean:(inputs) => {return GeometricMean(inputs)},
+        variance:(inputs) => {return GeometricVariance(inputs)},
+        sd:(inputs) => {return generalSD(GeometricVariance(inputs))},
 
         lowerValue:(inputs) => { return GeometricLowerValue(inputs)},
         upperValue:(inputs) => { return GeometricUpperValue(inputs)},
@@ -137,9 +137,9 @@ const userOptions = [
     {
         name: "Hypergeometric",
 
-        mean:(inputs) => {HypergeometricMean(inputs)},
-        variance:(inputs) => {HypergeometricVariance(inputs)},
-        sd:(inputs) => {generalSD(HypergeometricVariance(inputs))},
+        mean:(inputs) => {return HypergeometricMean(inputs)},
+        variance:(inputs) => {return HypergeometricVariance(inputs)},
+        sd:(inputs) => {return generalSD(HypergeometricVariance(inputs))},
 
         lowerValue:(inputs) => { return HypereometricLowerValue(inputs)},
         upperValue:(inputs) => { return HypereometricUpperValue(inputs)},
@@ -158,9 +158,9 @@ const userOptions = [
     {
         name: "Poisson",
 
-        mean:(inputs) => {PoissonMean(inputs)},
-        variance:(inputs) => {PoissonVariance(inputs)},
-        sd:(inputs) => {generalSD(PoissonVariance(inputs))},
+        mean:(inputs) => {return PoissonMean(inputs)},
+        variance:(inputs) => {return PoissonVariance(inputs)},
+        sd:(inputs) => {return generalSD(PoissonVariance(inputs))},
 
         lowerValue:(inputs) => { return PoissonLowerValue(inputs)},
         upperValue:(inputs) => { return PoissonUpperValue(inputs)},
@@ -173,7 +173,7 @@ const userOptions = [
         accentColor:"#FECB67",
         type: "Discrete",
         related: false,
-        inputs: [{label:"λ ratio", step: 1, value: 0, max:150}],
+        inputs: [{label:"λ ratio", step: 0.01, value: 0, max:150}],
         description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
     },
     {

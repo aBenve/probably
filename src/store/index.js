@@ -36,12 +36,12 @@ const store = createStore({
         getInputsValues(state){
 
             let zero = false;
-
-            state.currentOption.inputs.forEach(num => num.value === 0 ? zero = true : '')
+            state.currentOption.inputs.forEach(num => num.value === 0 || num.value === '0'? zero = true : '')
             if(zero)
                 return -1
             let toRet = []
             state.currentOption.inputs.forEach(inp => toRet.push(inp.value))
+
             return toRet
         }
 

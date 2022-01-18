@@ -5,6 +5,27 @@
       :labels="chartLabels"
       :color="distribution.color"
     />
+    <!--todo: Must refactor this into a new component -->
+    <div class="flex flex-row justify-center space-x-8 font-medium text-sm lg:text-lg mt-6">
+      <div   class=" p-4 rounded-full extra-data justify-center items-center flex-col flex lg:flex-row">
+        <div>
+          Mean
+        </div>
+        <div class="ml-0 lg:ml-3 mt-2 lg:mt-0 font-semibold" :style="{color:distribution.color}">{{ distribution.mean(inputs).toFixed(3) }}</div>
+      </div>
+      <div  class=" p-4 rounded-full  extra-data justify-center items-center flex-col flex lg:flex-row">
+        <div>
+          Variance
+        </div>
+        <div class="ml-0 lg:ml-3 mt-2 lg:mt-0 font-semibold" :style="{color:distribution.color}">{{ distribution.variance(inputs).toFixed(3) }}</div>
+      </div>
+      <div  class=" p-4 rounded-full  extra-data justify-center items-center flex-col flex lg:flex-row">
+        <div>
+          SD
+        </div>
+        <div class="ml-0 lg:ml-3 mt-2 lg:mt-0 font-semibold" :style="{color:distribution.color}">{{ distribution.sd(inputs).toFixed(3) }}</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,8 +36,8 @@ export default {
   name: "Graph",
   components: { myChart },
   data: () => ({
-    labels: [1, 2, 3, 4, 5],
-    data: [1, 2, 3, 4, 5],
+    labels: [],
+    data: [],
   }),
   computed: {
     ...mapGetters({
@@ -37,14 +58,11 @@ export default {
 
     chartLabels: function () {
 
-      const lowerValue = this.distribution.lowerValue(this.inputs)
-      const upperValue = this.distribution.upperValue(this.inputs)
-
-      console.log(lowerValue);
-      console.log(upperValue);
-      console.log(this.inputs);
+      const lowerValue = Math.floor(this.distribution.lowerValue(this.inputs))
+      const upperValue = Math.floor(this.distribution.upperValue(this.inputs))
 
       if (this.inputs === -1) return 0;
+
 
       let arr = [lowerValue];
 
@@ -62,4 +80,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.extra-data{
+  background-color: var(--gray-bg);
+  color: var(--text-gray);
+}
+
+
+</style>
