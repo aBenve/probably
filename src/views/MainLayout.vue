@@ -23,4 +23,5 @@ export default {
 .bg{
   background-color: #2F3339;
 }
+
 </style>

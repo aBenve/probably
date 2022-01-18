@@ -35,7 +35,7 @@
     </div>
 
 
-    <div class="rounded-2xl graph p-5  w-1/2">
+    <div class="rounded-2xl graph p-5 lg:w-2/3 mb-10 lg:mb-0 w-full md:w-full">
 
       <div class="flex-col flex justify-between h-full">
 
