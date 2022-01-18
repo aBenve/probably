@@ -11,8 +11,9 @@
       <div class="flex flex-col justify-between h-full p-5">
         <div class="flex flex-col">
           <div class="flex justify-between flex-row  mb-10">
-            <img  src="../assets/probABly-white.svg" alt="probab" height="10" width="120"/>
-
+            <router-link to="/">
+              <img  src="../assets/probABly-white.svg" alt="probab" height="10" width="120"/>
+            </router-link>
             <div class="rounded-full flex hover:text-gray-500 transition duration-75 ease-in p-2 text-white text-xl">
               <fa icon="times" @click="closeSidebar" />
             </div>

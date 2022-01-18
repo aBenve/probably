@@ -1,7 +1,7 @@
 <template>
-  <div class="bg flex h-screen w-screen p-5 justify-between overflow-auto">
+  <div class="bg flex h-screen w-screen p-5 md:pr-0 sm:pr-0 justify-between overflow-auto">
     <SidebarPanel/>
-    <div class="w-full h-full flex flex-col lg:flex-row">
+    <div class="w-full h-full flex flex-col lg:flex-row overflow-y-auto">
       <router-view/>
     </div>
   </div>

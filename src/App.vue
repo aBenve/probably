@@ -36,8 +36,9 @@ html {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+
 
   background: #272A2E;
   border-radius: 100px;

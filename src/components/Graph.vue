@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="rounded-2xl graph p-5 w-full">
     <myChart
       :chartData="chartData"
       :labels="chartLabels"
@@ -86,5 +86,7 @@ export default {
   color: var(--text-gray);
 }
 
-
+.graph{
+  background-color: #272A2E;
+}
 </style>

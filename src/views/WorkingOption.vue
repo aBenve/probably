@@ -1,9 +1,11 @@
 <template>
-  <div class="w-full flex flex-col lg:flex-row">
-    <DataArea :distribution="distribution" @value-changed="this.updateInputs"/>
-    <div class="rounded-2xl graph p-5 mb-10 lg:mb-0 w-full w-full">
-      <Graph />
+  <div class="w-full flex flex-col xl:flex-row pr-5">
+    <div class="flex flex-col p-0 lg:p-5 mb-5 lg:mb-0 lg:mr-5 xl:w-4/6 lg:w-full">
+      <InputArea :distribution="distribution" @value-changed="this.updateInputs"/>
+      <DataArea v-if="windowSize" class="order-10" :distribution="distribution"/>
     </div>
+    <Graph />
+    <DataArea v-if="!windowSize"  :distribution="distribution"/>
   </div>
 </template>
 
@@ -13,16 +15,31 @@ import optionsInfo from "../components/sidebar/optionsInfo";
 import Graph from "../components/Graph";
 
 import { mapMutations, mapGetters } from 'vuex'
+import InputArea from "../components/InputArea";
 
 export default {
   name: "WorkingOption",
-  components: {Graph, DataArea},
+  components: {InputArea, Graph, DataArea},
 
+  data: () => ({
+    windowWidth: Number
+  }),
+  mounted(){
+    window.addEventListener("resize", ()=> this.windowWidth = window.innerWidth);
+  },
+  unmounted() {
+    window.removeEventListener('resize', ()=> this.windowWidth = window.innerWidth);
+  },
   computed: {
 
     ...mapGetters([
         'getCurrentOption',
     ]),
+
+    windowSize: function (){
+      console.log(this.windowWidth)
+      return this.windowWidth > 1280
+    },
 
     distribution: function(){
       let op = optionsInfo.filter(obj => obj.name === this.$route.params.id).pop()
@@ -57,8 +74,6 @@ export default {
 </script>
 
 <style>
-.graph{
-  background-color: #272A2E;
-}
+
 
 </style>
