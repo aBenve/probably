@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex flex-col lg:flex-row">
+  <div class="w-full flex flex-col lg:flex-row pr-5">
     <div class="rounded-2xl p-5 mb-5 lg:mb-0 lg:mr-5 lg:w-11/12 text-2xl flex flex-col " >
       <div class="text-4xl text-white font-bold">
         News
@@ -35,14 +35,14 @@
     </div>
 
 
-    <div class="rounded-2xl graph p-5 lg:w-2/3 mb-10 lg:mb-0 w-full md:w-full">
+    <div class="rounded-2xl graph p-5 lg:w-2/3 mb-10 lg:mb-0 w-full md:w-full ">
 
       <div class="flex-col flex justify-between h-full">
 
       <div class="flex flex-col ">
 
           <div class=" flex justify-center ">
-            <div class="bg-gray-50 rounded-full logo items-center my-10 justify-center flex p-5">
+            <div class="bg-gray-50 rounded-full lg:scale-50 logo items-center my-10 justify-center flex p-5">
               <img src="../assets/original-ab-bg.svg" class="mb-4">
             </div>
           </div>
