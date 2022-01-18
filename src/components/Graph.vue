@@ -6,8 +6,8 @@
       :color="distribution.color"
     />
     <!--todo: Must refactor this into a new component -->
-    <div class="flex flex-row justify-center space-x-8 font-medium text-sm lg:text-lg mt-6">
-      <div   class=" p-4 rounded-full extra-data justify-center items-center flex-col flex lg:flex-row">
+    <div class="flex flex-row justify-center space-x-4 md:space-x-8 font-medium text-sm lg:text-lg mt-6">
+      <div   class="p-4 rounded-full extra-data justify-center items-center flex-col flex lg:flex-row">
         <div>
           Mean
         </div>
@@ -81,6 +81,14 @@ export default {
 </script>
 
 <style scoped>
+
+@media screen and (max-width: 500px){
+  .extra-data{
+    background-color: transparent !important;
+
+  }
+}
+
 .extra-data{
   background-color: var(--gray-bg);
   color: var(--text-gray);

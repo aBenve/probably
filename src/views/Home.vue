@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex flex-col lg:flex-row pr-5">
-    <div class="rounded-2xl p-5 mb-5 lg:mb-0 lg:mr-5 lg:w-11/12 text-2xl flex flex-col " >
-      <div class="text-4xl text-white font-bold">
+    <div class="rounded-2xl p-0 lg:p-5 mb-5 lg:mb-0 lg:mr-5 lg:w-11/12 text-2xl flex flex-col " >
+      <div class="md:text-4xl text-xl text-white font-bold">
         News
       </div>
       <div class="mt-10 text-white font-medium">
