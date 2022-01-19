@@ -2,7 +2,7 @@
   <div class="w-full flex flex-col xl:flex-row pr-5">
     <div class="flex flex-col p-0 lg:p-5 mb-5 lg:mb-0 lg:mr-5 xl:w-4/6 lg:w-full">
       <InputArea :distribution="distribution" @value-changed="this.updateInputs"/>
-      <DataArea v-if="windowSize" class="order-10" :distribution="distribution"/>
+      <DataArea v-if="windowSize" :distribution="distribution"/>
     </div>
     <Graph />
     <DataArea v-if="!windowSize"  :distribution="distribution"/>
@@ -22,7 +22,7 @@ export default {
   components: {InputArea, Graph, DataArea},
 
   data: () => ({
-    windowWidth: Number
+    windowWidth: window.innerWidth
   }),
   mounted(){
     window.addEventListener("resize", ()=> this.windowWidth = window.innerWidth);
