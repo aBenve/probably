@@ -1,20 +1,20 @@
 <template>
-  <BarChart  :chartData="testData" :options="options" />
+  <LineChart  v-bind="lineChartProps" />
 </template>
 <script>
 import {computed, defineComponent} from 'vue';
-import {BarChart } from 'vue-chart-3'
-import { Chart, BarController, CategoryScale, LinearScale, BarElement } from 'chart.js'
+import {LineChart, useLineChart } from 'vue-chart-3'
+import { registerables, Chart} from 'chart.js'
 import {mapGetters} from "vuex";
 import {useStore} from "vuex";
 
 
 export default defineComponent({
   name: "myChart",
-  components:{ BarChart },
+  components:{ LineChart },
   props:{
-    labels:[Number, Array],
-    chartData:[Number, Array],
+    labels:[Array, Number],
+    chartData:[Array, Number],
     color:String
   },
   computed: {
@@ -26,11 +26,11 @@ export default defineComponent({
 
   setup(props) {
 
-    Chart.register(BarController, CategoryScale, LinearScale, BarElement)
+    Chart.register(...registerables)
 
     const store = useStore()
 
-    const options = {
+    const options = computed(() => ({
       responsive: true,
       maintainAspectRatio: true,
       animation: {
@@ -39,26 +39,35 @@ export default defineComponent({
       },
       elements: {
         line: {
-          tension: 0.9
+          tension: 0.1,
         }
       },
       legend: {
         display: true
       },
-
-    }
+    }))
 
     const testData = computed(() => ({
       labels: props.labels,
       datasets: [
         {
           data: props.chartData,
-          backgroundColor: props.color,
-          label:store.getters.getCurrentOption.name
+          fill:true,
+          backgroundColor: props.color + '70',
+          pointBackgroundColor: '#000',
+          label:store.getters.getCurrentOption.name,
+          borderWidth: 2,
+          borderColor: props.color,
         },
       ],
     }))
-    return {testData, options}
+
+    const {lineChartProps} = useLineChart({
+      chartData:testData,
+      options
+    })
+
+    return {lineChartProps, testData, options}
   },
 })
 </script>

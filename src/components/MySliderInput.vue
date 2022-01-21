@@ -5,7 +5,7 @@
         {{ label }}
       </div>
       <div class="text-lg font-bold num-data px-5 py-3 rounded-full ">
-        <input type="number" min="0" :max="maxValue" v-model="value" class="num-input focus:outline-none bg-transparent w-full">
+        <input type="number" :min="minValue" :max="maxValue" v-model="value" class="num-input focus:outline-none bg-transparent w-full">
       </div>
     </div>
     <div class="has-tooltip relative">
@@ -23,7 +23,7 @@
           -{{topSubs}}
         </button>
       </span>
-      <input type="range" :step="step" class="w-full cursor-pointer slider mb-5" min="0" :max="maxValue" v-model="value"/>
+      <input type="range" :step="step" class="w-full cursor-pointer slider mb-5 tap:transition duration-1000 ease-in-out" :min="minValue" :max="maxValue" v-model="value"/>
     </div>
   </div>
 </template>
@@ -43,8 +43,10 @@ export default {
     smallAdd: Number,
     topSubs:Number,
     smallSubs:Number,
-    color:String,
-
+    minValue:{
+      default:0,
+      type:Number
+    },
   },
 
   methods:{
@@ -52,22 +54,22 @@ export default {
       // todo: Tiene algunos problemas. Hay veces que suma strings!!
       if(this.value === "0")
         this.value = 0
-      if(this.value.valueOf() + n.valueOf() > this.maxValue)
+      if(+this.value + +n > this.maxValue)
         return
-      this.value += n.valueOf()
+      this.value = +this.value +  +n
     },
     decreaseValue(n){
       if(this.value === "0")
         this.value = 0
-      if(this.value.valueOf() - n.valueOf() < 0)
+      if(+this.value - +n < 0)
         return
-      this.value -= n.valueOf()
+      this.value = +this.value -  +n
     }
   },
 
   watch: {
     value: function() {
-      this.$emit("value-changed", [this.value.valueOf()])
+      this.$emit("value-changed", [+this.value])
     },
     maxValue: function (){
       if(this.value > this.maxValue)

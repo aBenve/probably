@@ -1,5 +1,5 @@
 <template>
-  <div class="  text-2xl flex flex-col " >
+  <div class=" flex flex-col " >
     <div class="text-white font-bold">
       <div class="mb-10 text-4xl" :style="{color:distribution.color} ">
         {{ distribution.name }}

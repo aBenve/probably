@@ -40,7 +40,9 @@ const store = createStore({
             if(zero)
                 return -1
             let toRet = []
-            state.currentOption.inputs.forEach(inp => toRet.push(inp.value))
+            // IMPORTANTISIMO EL + previo al input.
+            // Deveria ponerlo en mas lugares, se asegura de que es numero y no string
+            state.currentOption.inputs.forEach(inp => toRet.push(+inp.value))
 
             return toRet
         }

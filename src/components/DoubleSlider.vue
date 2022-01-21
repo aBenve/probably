@@ -17,12 +17,14 @@
 
 
         :label="secondLabel"
-        :maxValue="relatedSliders ? maxSecondSlider:secondMaxValue"
+        :maxValue="relatedSliders === true ? maxSecondSlider:secondMaxValue"
         :step="secondStep"
         :top-subs="secondTopSubs"
         :top-add="secondTopAdd"
         :small-add="secondSmallAdd"
         :small-subs="secondSmallSubs"
+
+        :min-value="relatedSliders === 'Uniform' ? maxSecondSlider: 0"
 
         @value-changed="reSendEvent"
 
@@ -42,6 +44,7 @@ export default {
   props:{
     firstLabel:String,
     secondLabel:String,
+
     firstMaxValue:Number,
     secondMaxValue:Number,
 
@@ -58,7 +61,7 @@ export default {
     secondTopSubs:Number,
     secondSmallSubs:Number,
 
-    relatedSliders: Boolean
+    relatedSliders: [Boolean,String]
 
   },
   components:{mySliderInput},
@@ -69,6 +72,8 @@ export default {
     },
     reSendEvent(prop){
       this.$emit('value-changed', [-1,prop.pop()] )
+    },
+    checkRelated(){
     }
   }
 }

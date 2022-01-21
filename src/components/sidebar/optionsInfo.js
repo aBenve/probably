@@ -83,6 +83,59 @@ let PoissonUpperValue = (inputs) => {
     return Math.floor(PoissonMean(inputs) + 4 * generalSD(PoissonVariance(inputs)))
 }
 
+let NormalMean = (inputs) => {
+    return +inputs[0]
+}
+let NormalVariance = (inputs) => {
+    return Math.pow(+inputs[1],2)
+}
+
+let NormalLowerValue = (inputs) => {
+    return NormalMean(inputs) - 4 * generalSD(NormalVariance(inputs))
+}
+
+let NormalUpperValue = (inputs) => {
+    return NormalMean(inputs) + 4 * generalSD(NormalVariance(inputs))
+
+}
+
+let ExponentialMean = (inputs) => {
+    return inputs[0] === 0 ? 0 : 1/inputs[0]
+}
+let ExponentialVariance = (inputs) => {
+    return inputs[0] === 0 ? 0 : 1/Math.pow(inputs[0],2)
+}
+
+let ExponentialLowerValue = (inputs) => {
+    return inputs[0] * 0
+}
+
+let ExponentialUpperValue = (inputs) => {
+    return ExponentialPercentile(inputs, 0.999)
+
+}
+
+let ExponentialPercentile = (inputs,prob) => {
+    if(inputs[0] === 0)
+        return 0
+    return -Math.log(1-prob)/inputs[0]
+}
+
+let UniformMean = (inputs) => {
+    return (inputs[0] + inputs[1])/2
+}
+let UniformVariance = (inputs) => {
+    return Math.pow(inputs[1] - inputs[0],2)/12
+}
+
+let UniformLowerValue = (inputs) => {
+    return inputs[0] - (inputs[1] - inputs[0])/2 > 0 ? inputs[0] - (inputs[1] - inputs[0])/2 : 0
+}
+
+let UniformUpperValue = (inputs) => {
+    return +inputs[1] + (+inputs[1] - +inputs[0])/2
+
+}
 
 /*
     TODO: Quiza lo mejor sea ubicar el lower y el upper aca, ya que cada distro es diferente.
@@ -179,55 +232,78 @@ const userOptions = [
     {
         name: "Uniform",
 
-        mean:(inputs) => {return inputs[0] * inputs[1]},
-        variance:(inputs) => {return inputs[0] * inputs[1] (1 - inputs[1])},
-        sd:(inputs) => {return Math.sqrt(inputs[0] * inputs[1] (1 - inputs[1]))},
+        mean:(inputs) => {return UniformMean(inputs)},
+        variance:(inputs) => {return UniformVariance(inputs)},
+        sd:(inputs) => {return generalSD(UniformVariance(inputs))},
 
-        P:(n, p, x) => {
-            return  combinations(n, x) * Math.pow(p, x) * Math.pow((1-p), (n - x))
+        lowerValue:(inputs) => { return UniformLowerValue(inputs)},
+        upperValue:(inputs) => { return UniformUpperValue(inputs)},
+
+        P:(inputs, x) => {
+            if(x >= inputs[0] && x <= inputs[1])
+                return 1/(inputs[1] - inputs[0])
+            return 0
+        },
+
+        F:(inputs, x) => {
+            if(x <= inputs[0])
+                return 0
+            if(x >= inputs[1])
+                return 1
+            return (x - inputs[0]) / (inputs[1] - inputs[0])
         },
 
         color:"#A5EF9F",
         accentColor:"#85E97C",
         type: "Continuous",
-        related: true,
-        inputs: [{label:"Population", step:1, value: 0, max:500}, {label:"Positive cases", step: 1, value: 0, max:500}],
+        related: "Uniform", // CASO ESPECIAL
+        inputs: [{label:"Start", step:1, value: 0, max:500}, {label:"End", step: 1, value: 0, max:500}],
         description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
     },
     {
         name: "Exponential",
 
-        mean:(inputs) => {return inputs[0] * inputs[1]},
-        variance:(inputs) => {return inputs[0] * inputs[1] (1 - inputs[1])},
-        sd:(inputs) => {return Math.sqrt(inputs[0] * inputs[1] (1 - inputs[1]))},
+        mean:(inputs) => {return ExponentialMean(inputs)},
+        variance:(inputs) => {return ExponentialVariance(inputs)},
+        sd:(inputs) => {return generalSD(ExponentialVariance(inputs))},
 
-        P:(n, p, x) => {
-            return  combinations(n, x) * Math.pow(p, x) * Math.pow((1-p), (n - x))
+        lowerValue:(inputs) => { return ExponentialLowerValue(inputs)},
+        upperValue:(inputs) => { return ExponentialUpperValue(inputs)},
+
+        P:(inputs, x) => {
+            return inputs[0] * Math.exp(-inputs[0] * x)
+        },
+
+        F:(inputs, x) => {
+            return (1 - Math.exp(-inputs[0] * x))
         },
 
         color:"#67B6FE",
         accentColor:"#67B6FE",
         type: "Continuous",
         related: false,
-        inputs: [{label:"λ ratio", step:1, value: 0, max:500}],
+        inputs: [{label:"λ ratio", step:0.01, value: 0, max:200}],
         description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
     },
     {
         name: "Normal",
 
-        mean:(inputs) => {return inputs[0] * inputs[1]},
-        variance:(inputs) => {return inputs[0] * inputs[1] (1 - inputs[1])},
-        sd:(inputs) => {return Math.sqrt(inputs[0] * inputs[1] (1 - inputs[1]))},
+        mean:(inputs) => {return NormalMean(inputs)},
+        variance:(inputs) => {return NormalVariance(inputs)},
+        sd:(inputs) => {return generalSD(NormalVariance(inputs))},
 
-        P:(n, p, x) => {
-            return  combinations(n, x) * Math.pow(p, x) * Math.pow((1-p), (n - x))
+        lowerValue:(inputs) => { return NormalLowerValue(inputs)},
+        upperValue:(inputs) => { return NormalUpperValue(inputs)},
+
+        P:(inputs, x) => {
+            return  (1/Math.sqrt(2 * Math.PI * Math.pow(inputs[1],2))) * Math.exp(-(1/(2 * Math.pow(inputs[1],2))) * Math.pow(x-inputs[0],2))
         },
 
         color:"#84FEEB",
         accentColor:"#67FEE3",
         type: "Continuous",
         related: false,
-        inputs: [{label:"Mean μ", step:1, value: 0, max:500}, {label:"Standard deviation σ", step: 1, value: 0, max:500}],
+        inputs: [{label:"Mean μ", step:1, value: 0, max:500}, {label:"Standard deviation σ", step: 0.01, value: 0, max:100}],
         description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
     },
     {
