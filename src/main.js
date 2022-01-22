@@ -9,6 +9,15 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import './index.css'
 import "./plugins/chart"
 
+import MathJax, { initMathJax, renderByMathjax } from "mathjax-vue3";
+
+function onMathJaxReady() {
+    const el = document.getElementById("equation");
+    renderByMathjax(el);
+}
+
+initMathJax({}, onMathJaxReady);
+
 
 library.add({...icons})
 
@@ -16,5 +25,6 @@ library.add({...icons})
 createApp(App)
     .use(router)
     .use(store)
+    .use(MathJax)
     .component('fa',FontAwesomeIcon)
     .mount('#app')

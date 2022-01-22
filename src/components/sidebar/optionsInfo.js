@@ -137,11 +137,6 @@ let UniformUpperValue = (inputs) => {
 
 }
 
-/*
-    TODO: Quiza lo mejor sea ubicar el lower y el upper aca, ya que cada distro es diferente.
- */
-
-
 const userOptions = [
     {
         name: "Binomial",
@@ -163,7 +158,16 @@ const userOptions = [
         type: "Discrete",
         related: false,
         inputs: [{ label:"Trials", step:1, value:0, max:500}, {label:"Probability of success", step:0.001, value:0, max:1}],
-        description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
+        description: {
+            directions: "Enter the trials (n) and the probability of success (p) of the event and select a number or a range for the amount of times you want that event to know the probability (x value on the chart)",
+            equations: [
+                {eq:"f(x) = P(X = x) = \\binom{n}{x}p^x(1-p)^{n-x}", label:"p"},
+                {eq:"E(X) = np", label:"mean"},
+                {eq:"Var(X) = np(1-p)", label:"variance"},
+                {eq:"SD(X) = \\sqrt{np(1-p)}", label:"sd"},
+            ],
+            help:""
+        },
     },
     {
         name: "Geometric",
@@ -185,7 +189,16 @@ const userOptions = [
         type: "Discrete",
         related: false,
         inputs: [{label:"Probability of success", step:0.001, value:0, max:1}],
-        description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
+        description: {
+            directions: "Enter the probability of success (p) and select a number or a range in which the first success occurs (x value on the chart)",
+            equations: [
+                {eq:"f(x) = P(X = x) = p(1-p)^{x-1} \\quad 0 \\lt p \\le 1", label:"p"},
+                {eq:"E(X) = \\frac{1}{p}", label:"mean"},
+                {eq:"Var(X) = \\frac{1-p}{p^2}", label:"variance"},
+                {eq:"SD(X) = \\sqrt{\\frac{1-p}{p^2}}", label:"sd"},
+            ],
+            help:""
+        },
     },
     {
         name: "Hypergeometric",
@@ -206,7 +219,16 @@ const userOptions = [
         type: "Discrete",
         related: false,
         inputs: [{label:"Sample size", step:1, value:0, max:500}, {label:"Total number of objects", step:1, value: 0, max:500}, {label:"Amount of successes", step:1, value: 0, max:500}],
-        description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
+        description: {
+            directions: "Enter the size of the sample (n), total number of objects (N) and the number of successes (M) and select a number or a range for the amount of times that event you want to know the probability (x value on the chart)",
+            equations: [
+                {eq:"f(x) = P(X = x) = \\frac{\\binom{M}{n}\\binom{N-M}{n-x}}{\\binom{N}{n}}", label:"p"},
+                {eq:"E(X) = n\\frac{M}{N}", label:"mean"},
+                {eq:"Var(X) =  n\\frac{M}{N} (1 - \\frac{M}{N} (\\frac{N-n}{N-1}))", label:"variance"},
+                {eq:"SD(X) = \\sqrt{n\\frac{M}{N} (1 - \\frac{M}{N} (\\frac{N-n}{N-1}))}", label:"sd"},
+            ],
+            help:""
+        },
     },
     {
         name: "Poisson",
@@ -227,7 +249,16 @@ const userOptions = [
         type: "Discrete",
         related: false,
         inputs: [{label:"λ ratio", step: 0.01, value: 0, max:150}],
-        description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
+        description: {
+            directions: "Enter the rate λ and select a number or a range for more precise information (x value on the chart)",
+            equations: [
+                {eq:"f(x) = P(X = x) = \\frac{e^{-\\lambda} \\lambda^x}{x!} \\quad x \\gt 0", label:"p"},
+                {eq:"E(X) = \\lambda", label:"mean"},
+                {eq:"Var(X) =  \\lambda", label:"variance"},
+                {eq:"SD(X) = \\sqrt{\\lambda}", label:"sd"},
+            ],
+            help:""
+        },
     },
     {
         name: "Uniform",
@@ -258,7 +289,21 @@ const userOptions = [
         type: "Continuous",
         related: "Uniform", // CASO ESPECIAL
         inputs: [{label:"Start", step:1, value: 0, max:500}, {label:"End", step: 1, value: 0, max:500}],
-        description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
+        description: {
+            directions: "Enter start (a) and end (b) abd select a range for more precise information (x value on the chart)",
+            equations: [
+                {eq:"f_x(x) = \\frac{1}{b-a} \\quad x \\in (a,b)", label:"p"},
+                {eq:"F_X(x) = \\begin{cases}\n" +
+                        "   0 &x \\le a \\\\\n" +
+                        "   \\frac{x-a}{b-a} &x \\in (a,b) \\\\\n" +
+                        "   1 &x \\ge b\n" +
+                        "\\end{cases}", label:"F"},
+                {eq:"E(X) = \\frac{a+b}{2}", label:"mean"},
+                {eq:"Var(X) =  \\frac{(b-a)^2}{12}", label:"variance"},
+                {eq:"SD(X) = \\sqrt{\\frac{(b-a)^2}{12}}", label:"sd"},
+            ],
+            help:""
+        },
     },
     {
         name: "Exponential",
@@ -283,7 +328,20 @@ const userOptions = [
         type: "Continuous",
         related: false,
         inputs: [{label:"λ ratio", step:0.01, value: 0, max:200}],
-        description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
+        description: {
+            directions: " abd select a range for more precise information (x value on the chart)",
+            equations: [
+                {eq:"f_x(x) = \\lambda e^{-\\lambda x} \\quad x \\gt 0", label:"p"},
+                {eq:"F_X(x) =  P(X \\le x) = \\begin{cases}\n" +
+                        "   0 &x \\le 0 \\\\\n" +
+                        "   1 - e^{-\\lambda x} &x \\gt 0\\\\\n" +
+                        "   \\end{cases}", label:"F"},
+                {eq:"E(X) = \\frac{a+b}{2}", label:"mean"},
+                {eq:"Var(X) =  \\frac{(b-a)^2}{12}", label:"variance"},
+                {eq:"SD(X) = \\sqrt{\\frac{(b-a)^2}{12}}", label:"sd"},
+            ],
+            help:""
+        },
     },
     {
         name: "Normal",
@@ -304,7 +362,18 @@ const userOptions = [
         type: "Continuous",
         related: false,
         inputs: [{label:"Mean μ", step:1, value: 0, max:500}, {label:"Standard deviation σ", step: 0.01, value: 0, max:100}],
-        description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
+        description: {
+            directions: "Select the mean (μ) and the standard deviation (σ) and select a range for more precise information (x value on the chart)",
+            equations: [
+                {eq:"f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{-\\frac{1}{2\\sigma^2}(x-\\mu)^2}", label:"p"},
+                {eq:"F_X(x) = \\frac{1}{\\sigma \\sqrt{2\\Pi}} \\int^{x}_{-\\infty}e^{-((t-\\mu)^2)/(2\\sigma^2)}dt", label:"F"},
+
+                {eq:"E(X) = \\mu", label:"mean"},
+                {eq:"Var(X) =  \\sigma^2", label:"variance"},
+                {eq:"SD(X) = \\sigma", label:"sd"},
+            ],
+            help:""
+        },
     },
     {
         name: "Log-Normal",
@@ -322,7 +391,18 @@ const userOptions = [
         type: "Continuous",
         related: false,
         inputs: [{label:"Mean μ", step: 1, value: 0, max:500}, {label:"Standard deviation σ", step: 1, value: 0, max:500}],
-        description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
+        description: {
+            directions: "Select the mean (μ) and the standard deviation (σ) and select a range for more precise information (x value on the chart)",
+            equations: [
+                {eq:"f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{-\\frac{1}{2\\sigma^2}(x-\\mu)^2}", label:"p"},
+                {eq:"F_X(x) = \\frac{1}{\\sigma \\sqrt{2\\Pi}} \\int^{x}_{-\\infty}e^{-((t-\\mu)^2)/(2\\sigma^2)}dt", label:"F"},
+
+                {eq:"E(X) = \\mu", label:"mean"},
+                {eq:"Var(X) =  \\sigma^2", label:"variance"},
+                {eq:"SD(X) = \\sigma", label:"sd"},
+            ],
+            help:""
+        },
     },
     {
         name: "t",
@@ -340,7 +420,18 @@ const userOptions = [
         type: "Continuous",
         related: false,
         inputs: [{label:"Degrees of freedom", step: 1, value: 0, max:500}],
-        description: "Lorem ipsum dolor sit amet. Et quod dolor ut eveniet autem sit quos quidem 33 illum magnam. Id galisum vero quo quidem galisum At nesciunt sapiente non blanditiis corrupti qui eligendi nemo. Eum nostrum repudiandae sed facere laudantium sit facilis asperiores?\n"
+        description: {
+            directions: "Select the mean (μ) and the standard deviation (σ) and select a range for more precise information (x value on the chart)",
+            equations: [
+                {eq:"f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{-\\frac{1}{2\\sigma^2}(x-\\mu)^2}", label:"p"},
+                {eq:"F_X(x) = \\frac{1}{\\sigma \\sqrt{2\\Pi}} \\int^{x}_{-\\infty}e^{-((t-\\mu)^2)/(2\\sigma^2)}dt", label:"F"},
+
+                {eq:"E(X) = \\mu", label:"mean"},
+                {eq:"Var(X) =  \\sigma^2", label:"variance"},
+                {eq:"SD(X) = \\sigma", label:"sd"},
+            ],
+            help:""
+        },
     },
 ]
 export default userOptions;

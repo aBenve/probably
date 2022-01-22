@@ -133,7 +133,6 @@ export default {
 
       return arr;
     },
-    // TODO: CONTINUOUS FUNCTIONS NOT WORKING
     charDataContinuous: function (){
       let toRet = [];
       if (this.chartLabelsContinuous === 0) return 0;
@@ -160,8 +159,8 @@ export default {
       if(this.distribution.name === 'Exponential'){
         upperValue = this.distribution.upperValue(this.inputs).toFixed(2)
         decimalLevel = 4
-        // Tomo 10 puntos:
       }
+        // Tomo 100 puntos:
         for(let i = 0 ; i < 101 ; i++){
           arr.push((lowerValue + (upperValue - lowerValue) * i/100).toFixed(decimalLevel))
         }

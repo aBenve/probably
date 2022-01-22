@@ -55,7 +55,7 @@
               I'm 22 and a software engineering student at <a href="https://www.itba.edu.ar/" class="hover:text-white transition duration-100 ease-in-out">ITBA</a> currently in my third year and this is my first time developing a web page.
               <br>
               I've made this project as a personal challenge and I'm very proud of it.
-              The main objetive for this page is to be used as a tool to solve problems about probability distributions.
+              The main objective for this page is to be used as a tool to solve problems about probability distributions.
               <br>
               <br>
               Hope you like it. 👋
