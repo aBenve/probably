@@ -1,5 +1,6 @@
 <template>
   <div class="rounded-2xl graph p-5 w-full">
+    <!--<SliderTest/> -->
     <myChart
 
         v-if="distribution.type === 'Discrete'"
@@ -18,6 +19,9 @@
 
     <MyDoubleRangeSlider
         :style="accentColor"
+        :minValue="this.distribution.lowerValue(this.inputs)"
+        :maxValue="this.distribution.upperValue(this.inputs)"
+        :step="this.distribution.type === 'Discrete' ? 1 : 0.01"
         @value-changed="updateResult"
     />
     <div class="text-gray-50 font-bold text-3xl result p-4 rounded-full my-5 flex flex-row justify-center">
@@ -51,9 +55,10 @@ import { mapGetters } from "vuex";
 import myChart from "./myChart";
 import ContinueChart from "./ContinueChart";
 import MyDoubleRangeSlider from "./myDoubleRangeSlider";
+//import SliderTest from "./sliderTest";
 export default {
   name: "Graph",
-  components: {MyDoubleRangeSlider, myChart,ContinueChart},
+  components: { MyDoubleRangeSlider, myChart,ContinueChart},
   data: () => ({
     labels: [],
     data: [],
@@ -63,8 +68,6 @@ export default {
   computed: {
     ...mapGetters({
       distribution: "getCurrentOption",
-      lowerValue: "getLowerValue",
-      upperValue: "getUpperValue",
       inputs: "getInputsValues",
     }),
 
@@ -82,7 +85,6 @@ export default {
         //x.forEach(val => res += this.distribution.P(val))
         for(let i = 0 ; i < this.sliderValues.length ; i++){
           res += this.distribution.P(this.inputs, this.sliderValues[i])
-          console.log(res)
         }
         return res
       }
@@ -165,9 +167,6 @@ export default {
           arr.push((lowerValue + (upperValue - lowerValue) * i/100).toFixed(decimalLevel))
         }
 
-      console.log(arr)
-
-
       /*
 
       let aux = [];
@@ -183,12 +182,6 @@ export default {
     }
   },
   methods:{
-    getProbaDiscrete: function (){return 0},
-    getProbaContinuous: function(x){
-      if(this.inputs !== -1)
-        return this.distribution.F(this.inputs,x )
-      return 0
-    },
     updateResult: function(arr){
       this.sliderValues[0] = arr[0]
       this.sliderValues[1] = arr[1]

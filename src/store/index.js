@@ -3,15 +3,15 @@ import {createStore} from 'vuex'
 const store = createStore({
     state() {
         return{
-            currentOption: "Inicio",
+            currentOption: {},
         }
     },
     mutations:{
         setCurrentOption(state, option){
-            // Es raro pero sin esta linea al cambiar el estado, cambian los datos iniciales.
-            //option.inputs.forEach(inp => inp.value = 0)
+            // HABIA QUE HACER DEEP COPY, se estaba guardando la referencia
+            // Pero no puedoe hacer deep copy por que no es un objeto JSON, hay que limpiarlo antes de pasarlo.
 
-            state.currentOption =  Object.assign({}, option)
+            state.currentOption =  option;
         },
         updateInputs(state, newValues){
             for(let i = 0 ; i < newValues.length ; i++)

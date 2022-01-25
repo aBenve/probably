@@ -31,9 +31,11 @@
 export default {
   name: 'mySliderInput',
 
-  data:() => ({
-    value: 0,
-  }),
+  data: function (){
+    return{
+      value: this.prevValue
+    }
+  },
 
   props:{
     label:String,
@@ -46,6 +48,10 @@ export default {
     minValue:{
       default:0,
       type:Number
+    },
+    prevValue: {
+      type:Number,
+      default: 0
     },
   },
 

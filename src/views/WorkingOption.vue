@@ -37,12 +37,15 @@ export default {
     ]),
 
     windowSize: function (){
-      console.log(this.windowWidth)
       return this.windowWidth > 1280
     },
 
     distribution: function(){
       let op = optionsInfo.filter(obj => obj.name === this.$route.params.id).pop()
+
+      // Como no puedo hacer deep copy por que estoy usando un objeto de js, le pongo en 0 todos los valores de los inputs antes de pasarlo
+      op.inputs.forEach(input => input.value = 0)
+
       this.setCurrentOption(op)
       return this.getCurrentOption
     },

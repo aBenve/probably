@@ -3,14 +3,35 @@
     <div class="middle my-5" >
       <div class="multi-range-slider">
 
-        <input type="range" id="input-left" min="0" :max="maxValue" v-model="sliderMin">
-        <input type="range" id="input-right" min="0" :max="maxValue" v-model="sliderMax">
+        <input
+            type="range"
+            :step="step"
+            :min="minValue"
+            :max="maxValue"
+            v-model="sliderMin"
+            @mouseover="this.$refs['thumb-left'].classList.add('hover')"
+            @mouseleave="this.$refs['thumb-left'].classList.remove('hover')"
+        >
+        <input
+            type="range"
+            :step="step"
+            :min="minValue"
+            :max="maxValue"
+            v-model="sliderMax"
+            @mouseover="this.$refs['thumb-right'].classList.add('hover')"
+            @mouseleave="this.$refs['thumb-right'].classList.remove('hover')"
+        >
 
         <div class="slider">
           <div class="track"></div>
-          <div class="range"></div>
-          <div class="thumb left"></div>
-          <div class="thumb right"></div>
+          <div class="range" :style="
+            {
+              left: coveredAreaLeft - 1 + '%',
+              right: (100 - coveredAreaRight - 2)  + '%'
+            }">
+          </div>
+          <div ref="thumb-left" class="thumb left" :style="{left: coveredAreaLeft + '%'}"></div>
+          <div ref="thumb-right" class="thumb right" :style="{right: (100 - coveredAreaRight) + '%'}"></div>
         </div>
 
       </div>
@@ -31,21 +52,29 @@
 export default {
   name: "myDoubleRangeSlider",
   props:{
-
+    maxValue:Number,
+    minValue:Number,
+    step:Number
   },
   data: () => ({
-    sliderMin:0,
-    sliderMax:0,
-    maxValue:100
+    sliderMin: 0,
+    sliderMax: 0,
+    coveredAreaLeft:0,
+    coveredAreaRight:0,
   }),
   watch:{
     sliderMin: function (){
+
+      this.sliderMin = Math.min(this.sliderMin, this.sliderMax  )
+      this.coveredAreaLeft = (( this.sliderMin - this.minValue) / (this.maxValue - this.minValue)) * 100
       this.$emit("value-changed", [this.sliderMin.valueOf(), this.sliderMax.valueOf()])
     },
     sliderMax: function (){
+      this.sliderMax = Math.max(this.sliderMax, this.sliderMin)
+      this.coveredAreaRight = ((this.sliderMax - this.minValue) / (this.maxValue - this.minValue)) * 100
       this.$emit("value-changed", [this.sliderMin.valueOf(), this.sliderMax.valueOf()])
     }
-  }
+  },
 }
 </script>
 
@@ -72,13 +101,15 @@ input[type=number]::-webkit-outer-spin-button
 .middle {
   position: relative;
   width: 100%;
+
 }
 
 .slider {
   position: relative;
   z-index: 1;
-  height: 10px;
-  margin: 0 15px;
+  height: 25px;
+  margin: 0 10px;
+
 }
 .slider > .track {
   position: absolute;
@@ -87,7 +118,7 @@ input[type=number]::-webkit-outer-spin-button
   right: 0;
   top: 0;
   bottom: 0;
-  border-radius: 5px;
+  border-radius: 999px;
   background-color: var(--gray-bg);
 }
 .slider > .range {
@@ -97,33 +128,31 @@ input[type=number]::-webkit-outer-spin-button
   right: 25%;
   top: 0;
   bottom: 0;
-  border-radius: 5px;
+  border-radius: 999px;
   background-color: var(--accent-color, red);
 }
 .slider > .thumb {
   position: absolute;
   z-index: 3;
-  width: 30px;
-  height: 30px;
-  background-color: var(--accent-color, red);
-  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  background: radial-gradient(circle, var(--gray-bg) 50%,var(--accent-color, red) 55%);
+  border-radius: 100%;
   box-shadow: 0 0 0 0 rgba(98,0,238,0.1);
   transition: box-shadow .3s ease-in-out;
 }
 .slider > .thumb.left {
-  left: 25%;
-  transform: translate(-15px, -10px);
+  left: 0;
+  transform: translate(-8px, 0px);
 }
 .slider > .thumb.right {
-  right: 25%;
-  transform: translate(15px, -10px);
+  right: 0;
+  transform: translate(17px, 0px);
 }
 .slider > .thumb.hover {
-  box-shadow: 0 0 0 20px rgba(98,0,238,.1);
+  box-shadow: 0 0 0 20px rgba(98,0,238,.5);
 }
-.slider > .thumb.active {
-  box-shadow: 0 0 0 40px rgba(98,0,238,.2);
-}
+
 
 input[type=range] {
   position: absolute;
@@ -132,6 +161,7 @@ input[type=range] {
   z-index: 2;
   height: 10px;
   width: 100%;
+  top: 7px;
   opacity: 0;
 }
 input[type=range]::-webkit-slider-thumb {
@@ -143,5 +173,6 @@ input[type=range]::-webkit-slider-thumb {
   background-color: red;
   -webkit-appearance: none;
 }
+
 
 </style>

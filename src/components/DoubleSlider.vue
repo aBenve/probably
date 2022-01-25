@@ -12,6 +12,8 @@
 
         @value-changed="updateValue"
 
+        :prev-value="firstPrev"
+
     />
     <mySliderInput
 
@@ -27,6 +29,8 @@
         :min-value="relatedSliders === 'Uniform' ? maxSecondSlider: 0"
 
         @value-changed="reSendEvent"
+
+        :prev-value="secondPrev"
 
     />
   </div>
@@ -61,7 +65,10 @@ export default {
     secondTopSubs:Number,
     secondSmallSubs:Number,
 
-    relatedSliders: [Boolean,String]
+    relatedSliders: [Boolean,String],
+
+    firstPrev: Number,
+    secondPrev: Number
 
   },
   components:{mySliderInput},

@@ -19,6 +19,8 @@
 
           @value-changed="valueChanged"
 
+          :prev-value="distribution.inputs[0].value"
+
         />
       </div>
 
@@ -31,6 +33,9 @@
             :first-small-add="distribution.inputs[0].step"
             :first-top-subs="distribution.inputs[0].step * 5"
             :first-small-subs="distribution.inputs[0].step"
+
+            :first-prev="distribution.inputs[0].value"
+
 
             :second-max-value="distribution.inputs[1].max"
             :second-label="distribution.inputs[1].label"
@@ -45,6 +50,8 @@
             :related-sliders="distribution.related"
 
             @value-changed="valueChanged"
+
+            :second-prev="distribution.inputs[1].value"
 
         />
       </div>
@@ -85,6 +92,10 @@ export default {
 
   props:{
     distribution:Object
+  },
+
+  mounted() {
+    console.log(this.distribution)
   },
 
   methods:{
