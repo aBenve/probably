@@ -1,6 +1,6 @@
 <template>
       <div class="rounded-2xl left-5 top-5 overflow-x-hidden w-full">
-        <div class="flex flex-col justify-between h-full p-1">
+        <div class="flex flex-col justify-between h-full p-1 blur-effect-on-top">
           <div class="flex flex-col align-center">
             <div class="flex flex-row justify-center p-4">
               <router-link to="/">
@@ -39,6 +39,7 @@ export default {
 }
 
 .zoom:hover {
-  transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(1.03); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
+
 </style>

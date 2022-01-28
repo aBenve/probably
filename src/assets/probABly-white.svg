@@ -7,17 +7,17 @@
 
       .cls-2 {
         font-size: 92.7049px;
-        fill: #474747;
+        fill: #2f3339;
         font-family: Poppins-Bold, Poppins;
         font-weight: 700;
       }
 
       .cls-3 {
-        fill: #bbbbba;
+        fill: #7D8392;
       }
 
       .cls-4 {
-        fill: #ececec;
+        fill: #939AAB;
       }
     </style>
   </defs>

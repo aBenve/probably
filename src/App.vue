@@ -17,8 +17,9 @@ export default {
 :root{
   --gray-bg:#2f3339;
   --black-principal:#272a2e;
-
+  --black-darker:#252525;
   --text-gray:#939AAB;
+  --my-ab-color:#b55656;
   --lightest-gray:#ECECEC;
 }
 
@@ -32,6 +33,7 @@ html {
 }
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 /* Track */

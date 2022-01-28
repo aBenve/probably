@@ -51,7 +51,7 @@ export default {
 }
 
 .extra-data {
-  background-color: var(--gray-bg);
+  background-color: var(--black-darker);
   color: var(--text-gray);
 }
 

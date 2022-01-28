@@ -2,10 +2,10 @@
   <div class="w-full flex flex-col xl:flex-row pr-5">
     <div class="flex flex-col p-0 lg:p-5 mb-5 lg:mb-0 lg:mr-5 xl:w-4/6 lg:w-full">
       <InputArea :distribution="distribution" @value-changed="this.updateInputs"/>
-      <DataArea v-if="windowSize" :distribution="distribution"/>
+      <DataArea v-if="windowSize" :distribution="distribution" :style='accentColor'/>
     </div>
     <Graph />
-    <DataArea v-if="!windowSize"  :distribution="distribution"/>
+    <DataArea v-if="!windowSize"  :distribution="distribution" :style='accentColor'/>
   </div>
 </template>
 
@@ -35,6 +35,13 @@ export default {
     ...mapGetters([
         'getCurrentOption',
     ]),
+
+    accentColor(){
+      return{
+        '--accent-color': this.distribution.color,
+        '--accent-color-lighter': this.distribution.accentColor
+      }
+    },
 
     windowSize: function (){
       return this.windowWidth > 1280

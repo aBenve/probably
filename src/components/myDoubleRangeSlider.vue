@@ -139,7 +139,7 @@ input[type=number]::-webkit-outer-spin-button
   top: 0;
   bottom: 0;
   border-radius: 999px;
-  background-color: var(--gray-bg);
+  background-color: var(--black-darker);
 }
 .slider > .range {
   position: absolute;
@@ -158,7 +158,7 @@ input[type=number]::-webkit-outer-spin-button
   width: 25px;
   cursor: pointer;
   height: 25px;
-  background: radial-gradient(circle, var(--gray-bg) 50%,var(--accent-color, red) 55%);
+  background: radial-gradient(circle, var(--black-darker) 50%,var(--accent-color, red) 55%);
   border-radius: 100%;
   box-shadow: 0 0 0 0 rgba(98,0,238,0.1);
   transition: box-shadow .3s ease-in-out;
