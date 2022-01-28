@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       test: {
-        value:20,
+        value:[1,6],
       }
     }
   }

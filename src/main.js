@@ -11,7 +11,6 @@ import "./plugins/chart"
 
 import MathJax, { initMathJax, renderByMathjax } from "mathjax-vue3";
 
-
 function onMathJaxReady() {
     const el = document.getElementById("equation");
     renderByMathjax(el);

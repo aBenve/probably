@@ -16,6 +16,7 @@
     "core-js": "^3.6.5",
     "mathjax-vue3": "0.0.1",
     "mathjs": "^10.0.2",
+    "statistics.js": "^1.0.0",
     "vue": "^3.0.0",
     "vue-chart-3": "^3.0.7",
     "vue-router": "^4.0.12",

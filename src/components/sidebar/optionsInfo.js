@@ -2,6 +2,8 @@
 //todo: we may add the E(x), v(x) as parameters too
 
 import {combinations, factorial} from 'mathjs'
+//import Statistics from 'statistics.js'
+import standardNormal from "../../util/standarNormal";
 
 let generalSD = (variance) => {
     return Math.sqrt(variance)
@@ -355,6 +357,20 @@ const userOptions = [
 
         P:(inputs, x) => {
             return  (1/Math.sqrt(2 * Math.PI * Math.pow(inputs[1],2))) * Math.exp(-(1/(2 * Math.pow(inputs[1],2))) * Math.pow(x-inputs[0],2))
+        },
+
+        F:(inputs, x) => {
+            // z = x.xx
+            let z = ((x - inputs[0])/ inputs[1]).toFixed(2)
+
+            //console.log(z)
+            //console.log(Math.floor(+z * 10) )
+            //console.log(Math.floor((z * 100) % 10))
+            if(z < 0){
+                z = z * -1
+                return 1 - standardNormal[Math.floor(+z * 10) ][Math.floor((z * 100) % 10)]
+            }
+            return standardNormal[Math.floor(+z * 10) ][Math.floor((z * 100) % 10)]
         },
 
         color:"#84FEEB",

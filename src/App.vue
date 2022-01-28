@@ -23,7 +23,7 @@ export default {
 }
 
 #app {
-  font-family: Poppins, Helvetica, Arial, sans-serif;
+  font-family: Quicksand, Poppins, Helvetica, Arial, sans-serif;
   width: 100%;
   height: 100%;
 }

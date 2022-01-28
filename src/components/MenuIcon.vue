@@ -30,13 +30,18 @@
 
       </div>
   </transition>
+  <transition name="fade">
+    <div v-if="isSidebarOn" class="absolute top-0 left-0 opacity-20 w-full h-full" @click="closeSidebar" :style="{backgroundColor:'black'}" >
+
+    </div>
+  </transition>
 </template>
 <script>
 import myDropdown from "./myDropdown";
 
 export default {
   name: 'MenuIcon',
-  components: {myDropdown},
+  components:{myDropdown},
   data: () => ({
     isSidebarOn: false,
 
@@ -70,9 +75,18 @@ export default {
   transition: all 150ms ease-in 0s
 }
 
-.back-sidebar{
-  background-color: rgba(34,66,0,0.2);
+.fade-enter-active,
+.fade-leave-active
+{
+  transition: opacity 0.2s ease;
 }
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transition: all 150ms ease-in 0s
+}
+
 .mobile-sidebar{
   width: 15rem;
   height: 40rem;
