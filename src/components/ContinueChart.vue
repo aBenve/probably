@@ -15,7 +15,8 @@ export default defineComponent({
   props:{
     labels:[Array, Number],
     chartData:[Array, Number],
-    color:String
+    borderColor:Array,
+    bgColor:String,
   },
   computed: {
     ...mapGetters({
@@ -53,11 +54,11 @@ export default defineComponent({
         {
           data: props.chartData,
           fill:true,
-          backgroundColor: props.color + '70',
-          pointBackgroundColor: '#000',
+          backgroundColor: props.bgColor + '70',
+          pointBackgroundColor: props.borderColor,
           label:store.getters.getCurrentOption.name,
           borderWidth: 2,
-          borderColor: props.color,
+          borderColor: props.borderColor,
         },
       ],
     }))

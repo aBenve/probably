@@ -23,6 +23,6 @@ export default {
 <style scoped>
 .sidebar{
   width: 15rem;
-  background-color: #272A2E;
+  background-color:var(--black-principal);
 }
 </style>

@@ -9,14 +9,15 @@
 
       :chartData="chartDataDiscrete"
       :labels="chartLabelsDiscrete"
-      :color="distribution.color"
+      :color="getColoredBars"
     />
     <ContinueChart
         v-if="distribution.type === 'Continuous'"
 
         :chartData="charDataContinuous"
         :labels="chartLabelsContinuous"
-        :color="distribution.color"
+        :border-color="getColoredBars"
+        :bg-color="distribution.color"
     />
 
     <MyDoubleRangeSlider
@@ -44,25 +45,44 @@ export default {
   name: "Graph",
   components: {ResultWithRipple, ExtraData, MyDoubleRangeSlider, myChart,ContinueChart},
   data: () => ({
-    labels: [],
-    data: [],
     sliderValues:[],
-    result:0
+    result:0,
+    coloredBars:[],
   }),
   computed: {
     ...mapGetters({
       distribution: "getCurrentOption",
       inputs: "getInputsValues",
     }),
+    getColoredBars: function (){
 
+      let res = []
+
+      if(this.distribution.type === "Discrete"){
+        for(let i = 0 ; i < this.chartLabelsDiscrete.length-1 ; i++){
+          res[i] = 'rgb(37,37,37)'
+          if(this.chartLabelsDiscrete[i] >= this.sliderValues[0] && this.chartLabelsDiscrete[i] <= this.sliderValues[1])
+            res[i] = this.distribution.color
+        }
+        return res
+      }
+
+      for(let i = 0 ; i < this.chartLabelsContinuous.length-1 ; i++){
+        res[i] = 'rgb(37,37,37)'
+        if(this.chartLabelsContinuous[i] >= this.sliderValues[0] && this.chartLabelsContinuous[i] <= this.sliderValues[1]){
+          res[i] = this.distribution.color
+        }
+      }
+      return res
+
+
+    },
     // todo: getProbability solo usa los extremos que le damos, no pasa por los intermedios por ahora
     getProbability: function(){
       let res = 0;
 
       if(this.inputs === -1)
         return 0
-
-
 
       if(this.distribution.type === "Discrete"){
         for(let i = 0 ; i < this.chartLabelsDiscrete.length-1 ; i++){
@@ -148,7 +168,9 @@ export default {
       }
         // Tomo 100 puntos:
         for(let i = 0 ; i < 101 ; i++){
-          arr.push((lowerValue + (upperValue - lowerValue) * i/100).toFixed(decimalLevel))
+          let value = (lowerValue + (upperValue - lowerValue) * i/100).toFixed(decimalLevel)
+          arr.push(value)
+
         }
 
       /*

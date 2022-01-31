@@ -15,7 +15,7 @@ export default defineComponent({
   props:{
     labels:[Number, Array],
     chartData:[Number, Array],
-    color:String
+    color:Array
   },
   computed: {
     ...mapGetters({

@@ -21,7 +21,8 @@ export default {
 <style scoped>
 
 .bg{
-  background-color: #2F3339;
+  background-color: var(--gray-bg)
 }
+
 
 </style>
