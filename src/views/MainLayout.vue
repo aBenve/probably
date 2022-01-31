@@ -2,7 +2,11 @@
   <div class="bg flex h-screen w-screen p-5 md:pr-0 sm:pr-0 justify-between overflow-auto">
     <SidebarPanel/>
     <div class="w-full h-full flex flex-col lg:flex-row overflow-y-auto">
-      <router-view/>
+      <router-view v-slot="{Component}" >
+        <transition name="fade" mode="out-in">
+          <component :is="Component" :key="$route.path"/>
+        </transition>
+      </router-view>
     </div>
   </div>
 </template>
@@ -23,6 +27,14 @@ export default {
 .bg{
   background-color: var(--gray-bg)
 }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .2s ease-in-out;
+}
 
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 
 </style>

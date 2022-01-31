@@ -1,9 +1,43 @@
 <template>
   <div class="w-full flex flex-col lg:flex-row pr-5">
-    <div class="rounded-2xl p-0 lg:p-5 mb-5 lg:mb-0 lg:mr-5 lg:w-11/12 text-2xl flex flex-col " >
+    <div class="rounded-2xl p-0 lg:p-5 mb-5 lg:mb-0 lg:mr-5 lg:w-11/12 text-2xl flex flex-col overflow-y-auto" >
       <div class="md:text-4xl text-xl text-white font-bold">
         News
       </div>
+
+      <div class="mt-10 text-white font-medium">
+        (28/1)
+      </div>
+      <ul class="common-text text-lg mt-2">
+        <li class="mb-2">
+          - Double slider working
+        </li>
+        <li class="mb-2">
+          - Charts color changes with slider variations
+        </li>
+        <li class="mb-2">
+          - Sidebar issues solved. Just one more to solve
+        </li>
+      </ul>
+      <div class="mt-10 text-white font-medium">
+        (21/1)
+      </div>
+      <ul class="common-text text-lg mt-2">
+        <li class="mb-2">
+          - Continuous charts working. Have to finish log-normal and t
+        </li>
+        <li class="mb-2">
+          - Working on double slider
+        </li>
+      </ul>
+      <div class="mt-10 text-white font-medium">
+        (18/1)
+      </div>
+      <ul class="common-text text-lg mt-2">
+        <li class="mb-2">
+          - Latex render library added
+        </li>
+      </ul>
       <div class="mt-10 text-white font-medium">
         (17/1)
       </div>
