@@ -1,8 +1,8 @@
 <template>
-  <div  class="rounded-full flex hover:bg-gray-500 transition duration-75 ease-in p-1 text-white text-xl"
+  <div  class="rounded-full flex hover:bg-gray-700 transition duration-75 ease-in  text-white text-xl mb-5"
         @click="openSideBar"
   >
-    <fa icon="bars" :class="isSidebarOn ? 'active' : ''"/>
+    <fa icon="bars" :class="isSidebarOn ? 'opacity-0' : ''"/>
   </div>
   <transition name="slide">
 

@@ -42,19 +42,19 @@ html {
   margin-bottom: 0.5rem;
 
 
-  background: #272A2E;
+  background: var(--text-gray);
   border-radius: 100px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #555555;
+  background: var(--black-principal);
   border-radius: 100px;
 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3e3e;
+  background: var(--black-darker);
 }
 </style>

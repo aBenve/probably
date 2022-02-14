@@ -15,13 +15,14 @@
         v-if="distribution.type === 'Continuous'"
 
         :chartData="charDataContinuous"
+        :chartDistributionData="chartDistributionDataContinuous"
         :labels="chartLabelsContinuous"
         :border-color="getColoredBars"
         :bg-color="distribution.color"
     />
 
     <MyDoubleRangeSlider
-        class="mx-10"
+        class="ml-10"
         :style="accentColor"
         :minValue="this.distribution.lowerValue(this.inputs)"
         :maxValue="this.distribution.upperValue(this.inputs)"
@@ -147,6 +148,16 @@ export default {
       );
       return toRet;
     },
+
+    chartDistributionDataContinuous: function (){
+      let toRet = [];
+      if (this.chartLabelsContinuous === 0) return 0;
+      this.chartLabelsContinuous.forEach((num) =>
+          toRet.push(this.distribution.F(this.inputs, num))
+      );
+      return toRet;
+    },
+
     chartLabelsContinuous: function (){
       let lowerValue = Math.ceil(this.distribution.lowerValue(this.inputs))
       //const lowerValue = this.distribution.lowerValue(this.inputs).toFixed(2)
@@ -169,7 +180,11 @@ export default {
         // Tomo 100 puntos:
         for(let i = 0 ; i < 101 ; i++){
           let value = (lowerValue + (upperValue - lowerValue) * i/100).toFixed(decimalLevel)
-          arr.push(value)
+          // La idea es interesante, pero se ve feo.
+          //if(value < this.sliderValues[0] || value > this.sliderValues[1])
+          //  arr.push(null)
+          //else
+            arr.push(value)
 
         }
 

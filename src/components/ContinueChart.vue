@@ -6,7 +6,7 @@ import {computed, defineComponent} from 'vue';
 import {LineChart, useLineChart } from 'vue-chart-3'
 import { registerables, Chart} from 'chart.js'
 import {mapGetters} from "vuex";
-import {useStore} from "vuex";
+//import {useStore} from "vuex";
 
 
 export default defineComponent({
@@ -15,6 +15,7 @@ export default defineComponent({
   props:{
     labels:[Array, Number],
     chartData:[Array, Number],
+    chartDistributionData:[Array, Number],
     borderColor:Array,
     bgColor:String,
   },
@@ -29,7 +30,7 @@ export default defineComponent({
 
     Chart.register(...registerables)
 
-    const store = useStore()
+   // const store = useStore()
 
     const options = computed(() => ({
       responsive: true,
@@ -46,6 +47,18 @@ export default defineComponent({
       legend: {
         display: true
       },
+      scales: {
+        A: {
+          position: 'left',
+        },
+        B: {
+          position: 'right',
+          ticks: {
+            max: 1,
+            min: 0
+          }
+        }
+      }
     }))
 
     const testData = computed(() => ({
@@ -54,12 +67,25 @@ export default defineComponent({
         {
           data: props.chartData,
           fill:true,
+          yAxisID: 'A',
           backgroundColor: props.bgColor + '70',
           pointBackgroundColor: props.borderColor,
-          label:store.getters.getCurrentOption.name,
-          borderWidth: 2,
+          label:'Density',
+          borderWidth: 1,
           borderColor: props.borderColor,
         },
+        {
+          data: props.chartDistributionData,
+          fill:true,
+          yAxisID: 'B',
+          label:'Distribution',
+          backgroundColor: props.bgColor + '10',
+          pointBackgroundColor: props.borderColor + '20',
+          borderColor: props.bgColor + '10',
+          pointRadius:0,
+          tension:1
+
+        }
       ],
     }))
 

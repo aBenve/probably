@@ -23,7 +23,7 @@ const router = createRouter(
                         return true
                     }
                     next({name: "404Page"})
-                }
+                },
             },
             {
                 path: '/notFound',

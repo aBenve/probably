@@ -26,8 +26,8 @@
           <div class="track"></div>
           <div ref="range" class="range" :style="
             {
-              left: coveredAreaLeft - 1 + '%',
-              right: (100 - coveredAreaRight - 1)  + '%'
+              left: coveredAreaLeft - 1.2 + '%',
+              right: (100 - coveredAreaRight - 1.2)  + '%'
             }">
           </div>
           <div ref="thumb-left" class="thumb left" :style="{left: coveredAreaLeft + '%'}"></div>
@@ -37,10 +37,10 @@
       </div>
     </div>
     <div class="flex flex-row w-full justify-between  ">
-      <div class="text-lg font-bold num-data px-5 py-3 rounded-full mx-6">
+      <div class="text-lg font-bold num-data px-3 py-3 rounded-full ">
         <input type="number" :min="minValue" :max="maxValue" v-model="sliderMin" class=" focus:outline-none bg-transparent w-full" @input="checkBottom">
       </div>
-      <div class="text-lg font-bold num-data px-5 py-3 rounded-full mx-6 ">
+      <div class="text-lg font-bold num-data px-3 py-3 rounded-full ">
         <input type="number" :min="minValue" :max="maxValue" v-model="sliderMax" class=" focus:outline-none bg-transparent w-full" @input="checkTop">
       </div>
     </div>
@@ -100,9 +100,9 @@ export default {
 
 <style scoped>
 .num-data{
-  background-color: #252525;
+  background-color: var(--black-darker);
   color: var(--accent-color, red);
-  width: 5.5rem;
+  width: 6rem;
   box-shadow: inset 0 0 0 0px var(--accent-color, red);
   transition: 0.2s ease-in-out;
 }

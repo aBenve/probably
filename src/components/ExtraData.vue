@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row justify-center space-x-4 md:space-x-8 font-medium text-sm lg:text-lg my-3">
+  <div class="flex flex-row justify-center space-x-4 md:space-x-8 font-medium text-sm lg:text-lg my-3 mb-5">
     <div class="p-4 rounded-full extra-data justify-center items-center flex-col flex md:flex-row">
       <div>
         Mean
