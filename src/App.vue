@@ -16,7 +16,7 @@ export default {
 
 :root{
   --gray-bg:#2f3339;
-  --black-principal:#272a2e;
+  --black-principal: #2a2d31;
   --black-darker:#252525;
   --text-gray:#939AAB;
   --my-ab-color:#b55656;

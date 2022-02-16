@@ -1,9 +1,9 @@
 <template>
   <div class="mr-5 flex">
-    <div class="flex-row lg:hidden z-10 ">
+    <div class="flex-row lg:hidden ">
       <MenuIcon />
     </div>
-    <div class=" rounded-2xl p-2 sidebar hidden lg:flex text-white sidebar ">
+    <div class=" lg:flex hidden">
       <Sidebar/>
     </div>
   </div>
@@ -21,8 +21,5 @@ export default {
 </script>
 
 <style scoped>
-.sidebar{
-  width: 15rem;
-  background-color:var(--black-principal);
-}
+
 </style>

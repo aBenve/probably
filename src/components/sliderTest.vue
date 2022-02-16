@@ -21,17 +21,21 @@ export default {
 }
 </script>
 
-<style  src="@vueform/slider/themes/default.css">
+<style  >
 :root{
   --slider-connect-bg: #a594fe;
   --slider-bg: #252525;
-  --slider-height: 20px;
+  --slider-height: 19px;
   --slider-handle-width: 20px;
   --slider-handle-height: 20px;
-  --slider-handle-bg: radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(165,148,254,1) 60%);
+  --slider-handle-bg: radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(165,148,254,1) 60%);
   --slider-tooltip-bg: #a594fe;
 
   --slider-handle-ring-width: 3px;
   --slider-handle-ring-color: #a594fe30;
 }
+</style>
+
+<style src="@vueform/slider/themes/default.css">
+
 </style>

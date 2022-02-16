@@ -220,6 +220,6 @@ export default {
 }
 
 .graph{
-  background-color: #272A2E;
+  background-color: var(--black-principal);
 }
 </style>

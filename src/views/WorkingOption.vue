@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex flex-col xl:flex-row p-0 sm:pr-5">
-    <div class="flex flex-col p-0 lg:p-5 mb-5 lg:mb-0 lg:mr-5 xl:w-4/6 lg:w-full">
+    <div class="flex flex-col p-0 lg:p-5 lg:pl-0 mb-5 lg:mb-0 lg:mr-5 xl:w-4/6 lg:w-full">
       <InputArea :distribution="distribution" @value-changed="this.updateInputs"/>
       <DataArea v-if="windowSize" :distribution="distribution" :style='accentColor'/>
     </div>

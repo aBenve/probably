@@ -1,8 +1,15 @@
 <template>
-  <button @click="toggle = !toggle" class="mt-4">
-    <div :class="toggle ? 'active':''" class=" mb-4 drop-options rounded-2xl p-2 px-4 text-xl font-medium transition duration-75 ease-in">
+  <button @click="toggle = !toggle" :class="toggle? 'active rounded-2xl' : ''">
+    <div :class="toggle ? 'dropdown-active':'drop-options'" class=" mb-4  rounded-2xl p-2 px-4 text-lg font-medium transition duration-75 ease-in">
       <div class="flex flex-row justify-between items-center">
-        {{name}}
+
+        <div class="flex-row ">
+          <fa :icon="mainIcon" class="mr-2"/>
+          <span>
+            {{name}}
+          </span>
+        </div>
+
         <transition name="rotate-arrow">
           <div>
             <fa :icon="toggle ? 'angle-down' : 'angle-up' " class=""/>
@@ -12,8 +19,8 @@
     </div>
     <transition name="slideBottom">
       <div  v-if="toggle" >
-        <div class="mb-2 drop-options-menu rounded-2xl  font-medium transition duration-75 ease-in" v-for="option in menu" :key="option">
-          <router-link  class="flex align-middle justify-center" :to="option.name">
+        <div class="mb-2 drop-options-menu rounded-2xl text-sm  font-medium transition duration-75 ease-in mx-2" v-for="option in menu" :key="option">
+          <router-link  class="flex align-middle justify-center" :to="option.name" @click="this.$emit('dropDown-option-clicked')">
             <div class="w-full h-full p-2">
               {{ option.name }}
             </div>
@@ -32,7 +39,12 @@ export default {
       name: {
         type: String,
         require: true,
+      },
+      mainIcon:{
+        type:String,
+        require: false
       }
+
   },
   data:() => ({
     toggle: false,
@@ -46,15 +58,18 @@ export default {
 </script>
 <style scoped>
 .active{
-  color: white;
-  font-weight: 600;
+  background: rgba(60, 60, 60, 0.3);
 }
+.dropdown-active{
+  font-weight: 700;
+  color: var(--lightest-gray);
+}
+
 .drop-options-menu:hover{
   background-color:rgba(47,51,57, 0.7);
 }
 .drop-options-menu{
   color:var(--text-gray);
-
 }
 .drop-options{
   color:var(--text-gray);

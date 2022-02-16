@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full flex flex-col lg:flex-row pr-5">
-    <div class="rounded-2xl p-0 lg:p-5 mb-5 lg:mb-0 lg:mr-5 lg:w-11/12 text-2xl flex flex-col" >
-      <div class="md:text-4xl text-xl text-white font-bold">
+  <div class="w-full flex flex-col lg:flex-row p-0 sm:pr-5 ">
+    <div class="rounded-2xl p-0 lg:p-5 mb-5 lg:mb-0  lg:w-11/12 text-2xl flex flex-col" >
+      <div class="md:text-4xl text-xl text-white font-bold mb-5">
         News
       </div>
       <div class=" overflow-y-auto">
