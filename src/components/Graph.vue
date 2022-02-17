@@ -24,8 +24,8 @@
     <MyDoubleRangeSlider
         class="ml-10"
         :style="accentColor"
-        :minValue="this.distribution.lowerValue(this.inputs)"
-        :maxValue="this.distribution.upperValue(this.inputs)"
+        :minValue="minValueSlider"
+        :maxValue="maxValueSlider"
         :step="this.distribution.type === 'Discrete' ? 1 : 0.01"
         @value-changed="updateResult"
     />
@@ -152,6 +152,7 @@ export default {
     chartDistributionDataContinuous: function (){
       let toRet = [];
       if (this.chartLabelsContinuous === 0) return 0;
+
       this.chartLabelsContinuous.forEach((num) =>
           toRet.push(this.distribution.F(this.inputs, num))
       );
@@ -159,34 +160,39 @@ export default {
     },
 
     chartLabelsContinuous: function (){
-      let lowerValue = Math.ceil(this.distribution.lowerValue(this.inputs))
-      //const lowerValue = this.distribution.lowerValue(this.inputs).toFixed(2)
-      let upperValue = Math.ceil(this.distribution.upperValue(this.inputs))
-
-      let decimalLevel = 2
-
-      //console.log(lowerValue)
-      //console.log(upperValue)
-      //console.log(this.inputs)
 
       if (this.inputs === -1) return 0;
+
+      //let lowerValue = Math.ceil(this.distribution.lowerValue(this.inputs))
+      let lowerValue = this.distribution.lowerValue(this.inputs).toFixed(2)
+      //let upperValue = Math.ceil(this.distribution.upperValue(this.inputs))
+      let upperValue = this.distribution.upperValue(this.inputs).toFixed(2)
+
+      let decimalLevel = 3 // MAGIC NUMBER
+
+      //console.log("Lower " + lowerValue)
+      //console.log("Upper " + upperValue)
+      //console.log(this.inputs)
+
+
 
       let arr = [];
 
       if(this.distribution.name === 'Exponential'){
-        upperValue = this.distribution.upperValue(this.inputs).toFixed(2)
-        decimalLevel = 4
+        //upperValue = this.distribution.upperValue(this.inputs).toFixed(2)
+        decimalLevel = 4 // MAGIC NUMBER
       }
-        // Tomo 100 puntos:
-        for(let i = 0 ; i < 101 ; i++){
-          let value = (lowerValue + (upperValue - lowerValue) * i/100).toFixed(decimalLevel)
-          // La idea es interesante, pero se ve feo.
-          //if(value < this.sliderValues[0] || value > this.sliderValues[1])
-          //  arr.push(null)
-          //else
-            arr.push(value)
+      // Tomo 100 puntos:
+      for(let i = 0 ; i < 101 ; i++){
+        let value = (+lowerValue + (+upperValue - +lowerValue) * i/100)
+        value = Number(+value).toFixed(decimalLevel)
 
-        }
+        // La idea es interesante, pero se ve feo.
+        //if(value < this.sliderValues[0] || value > this.sliderValues[1])
+        //  arr.push(null)
+        //else
+          arr.push(+value)
+      }
 
       /*
 
@@ -200,7 +206,17 @@ export default {
 
        */
       return arr;
+    },
+
+    minValueSlider: function(){
+      let lower = this.distribution.lowerValue(this.inputs)
+      return this.distribution.type === 'Discrete' ? Math.floor(lower) : lower.toFixed(2)
+    },
+    maxValueSlider: function (){
+      let upper = this.distribution.upperValue(this.inputs)
+      return this.distribution.type === 'Discrete' ? Math.floor(upper) : upper.toFixed(2)
     }
+
   },
   methods:{
     updateResult: function(arr){

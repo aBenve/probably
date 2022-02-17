@@ -1,5 +1,9 @@
 <template>
-  <div class="mt-5">
+  <div class="mt-5" style="{
+    .test{
+      --accent-color: black;
+    }
+  }">
     <div class="flex flex-row items-center justify-between mb-5">
       <div class="text-lg font-medium">
         {{ label }}
@@ -23,17 +27,46 @@
           -{{topSubs}}
         </button>
       </span>
+
+      <!--
       <input type="range" :step="step" class="w-full cursor-pointer slider mb-5 tap:transition duration-1000 ease-in-out" :min="minValue" :max="maxValue" v-model="value"/>
+
+      -->
+      <Slider
+          :step="step"
+          :lazy="false"
+          v-model="value"
+          :min="minValue"
+          :max="maxValue"
+          :tooltips="false"
+
+          style="{
+            --slider-handle-ring-width: 3px;
+
+            --slider-connect-bg: var(--accent-color, red);
+            --slider-bg: #252525;
+            --slider-height: 15px;
+            --slider-handle-width: 25px;
+            --slider-handle-height: 25px;
+            --slider-handle-bg: radial-gradient(circle, rgba(37,37,37,1) 50%, var(--accent-color, red) 55%);
+
+            --slider-handle-ring-color: #00000030
+          }"
+      />
     </div>
   </div>
 </template>
 <script>
+import Slider from '@vueform/slider'
+import {mapGetters} from "vuex";
+
 export default {
   name: 'mySliderInput',
-
+  components: {Slider},
   data: function (){
     return{
-      value: this.prevValue
+      value: this.prevValue,
+      colorTest: "#461234"
     }
   },
 
@@ -55,9 +88,14 @@ export default {
     },
   },
 
+  computed:{
+    ...mapGetters([
+      'getCurrentOption',
+    ]),
+  },
+
   methods:{
     increaseValue(n){
-      // todo: Tiene algunos problemas. Hay veces que suma strings!!
       if(this.value === "0")
         this.value = 0
       if(+this.value + +n > this.maxValue)
@@ -87,6 +125,18 @@ export default {
   }
 }
 </script>
+
+<style src="@vueform/slider/themes/default.css">
+
+</style>
+<style>
+/*
+  Fue bastante raro y dificil ponerle los colores al slider de la libreria. todo: Habria que arreglar el tema del accent-color que esta por todos lados bastante mal.
+ */
+.slider-connect:hover{
+  background-color: var(--accent-color-lighter);
+}
+</style>
 <style scoped>
 
 input[type=number]::-webkit-inner-spin-button,

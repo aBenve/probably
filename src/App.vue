@@ -21,6 +21,7 @@ export default {
   --text-gray:#939AAB;
   --my-ab-color:#b55656;
   --lightest-gray:#ECECEC;
+
 }
 
 #app {

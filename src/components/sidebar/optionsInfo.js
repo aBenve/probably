@@ -363,7 +363,6 @@ const userOptions = [
             // z = x.xx
             let z = ((x - inputs[0])/ inputs[1]).toFixed(2)
 
-            //console.log(z)
             //console.log(Math.floor(+z * 10) )
             //console.log(Math.floor((z * 100) % 10))
             if(z < 0){

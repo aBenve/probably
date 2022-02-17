@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Slider v-model="test.value" v-bind="test" :tooltips="false"/>
+    <Slider
+        v-model="test.value"
+        v-bind="test"
+        :tooltips="false"/>
   </div>
 </template>
 
@@ -8,13 +11,18 @@
 import Slider from '@vueform/slider'
 
 export default {
+
+  props:{
+
+  },
+
   components: {
     Slider,
   },
   data() {
     return {
       test: {
-        value:[1,6],
+        value:1,
       }
     }
   }
@@ -25,10 +33,10 @@ export default {
 :root{
   --slider-connect-bg: #a594fe;
   --slider-bg: #252525;
-  --slider-height: 19px;
-  --slider-handle-width: 20px;
-  --slider-handle-height: 20px;
-  --slider-handle-bg: radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(165,148,254,1) 60%);
+  --slider-height: 10px;
+  --slider-handle-width: 25px;
+  --slider-handle-height: 25px;
+  --slider-handle-bg: radial-gradient(circle, rgba(37,37,37,1) 50%, rgba(165,148,254,1) 55%);
   --slider-tooltip-bg: #a594fe;
 
   --slider-handle-ring-width: 3px;
