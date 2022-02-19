@@ -1,7 +1,7 @@
 <template>
-  <div class="  text-2xl flex flex-col overflow-auto ">
-    <div class="text-gray-500 text-lg font-medium mt-10 ">
-      <div class="mb-10">
+  <div class="  text-2xl flex flex-col  ">
+    <div class="text-gray-500 text-lg font-medium mt-10 pr-5">
+      <div class="mb-10 ">
         {{ distribution.description.directions}}
       </div>
 

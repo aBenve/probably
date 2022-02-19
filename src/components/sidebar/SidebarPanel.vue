@@ -1,5 +1,5 @@
 <template>
-  <div class="mr-5 flex">
+  <div class=" flex">
     <div class="flex-row lg:hidden ">
       <MenuIcon />
     </div>

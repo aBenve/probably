@@ -52,6 +52,7 @@
 
             --slider-handle-ring-color: #00000030
           }"
+
       />
     </div>
   </div>

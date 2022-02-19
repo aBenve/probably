@@ -1,9 +1,26 @@
 <template>
   <div>
     <Slider
-        v-model="test.value"
-        v-bind="test"
-        :tooltips="false"/>
+        :step="step"
+        :lazy="false"
+        v-model="value"
+        :min="minValue"
+        :max="maxValue"
+        :tooltips="false"
+
+        style="{
+            --slider-handle-ring-width: 3px;
+
+            --slider-connect-bg: var(--accent-color, red);
+            --slider-bg: #252525;
+            --slider-height: 15px;
+            --slider-handle-width: 25px;
+            --slider-handle-height: 25px;
+            --slider-handle-bg: radial-gradient(circle, rgba(37,37,37,1) 50%, var(--accent-color, red) 55%);
+
+            --slider-handle-ring-color: #00000030
+          }"
+    />
   </div>
 </template>
 
@@ -13,7 +30,10 @@ import Slider from '@vueform/slider'
 export default {
 
   props:{
-
+      step:Number,
+      preValue:[Number, Array],
+      minValue: Number,
+      maxValue: Number
   },
 
   components: {
@@ -21,9 +41,7 @@ export default {
   },
   data() {
     return {
-      test: {
-        value:1,
-      }
+      value: this.preValue
     }
   }
 }

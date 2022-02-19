@@ -4,10 +4,11 @@
           <div class="flex flex-row justify-center p-4">
             <router-link to="/">
               <div >
-                <img class="zoom " src="../../assets/probABly-white.svg" alt="probab" height="10" width="200" />
+                <img class="zoom " src="../../assets/proABly-new.svg" alt="probably" height="10" width="150" />
               </div>
             </router-link>
           </div>
+          <br/>
           <my-dropdown class="my-1" name="Discrete" mainIcon="chart-bar" @dropDown-option-clicked="this.$emit('dropDown-option-clicked')"/>
           <my-dropdown class="my-1" name="Continuous" mainIcon="chart-area" @dropDown-option-clicked="this.$emit('dropDown-option-clicked')"/>
 

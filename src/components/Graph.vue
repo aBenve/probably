@@ -20,16 +20,23 @@
         :border-color="getColoredBars"
         :bg-color="distribution.color"
     />
-
     <MyDoubleRangeSlider
-        class="ml-10"
-        :style="accentColor"
         :minValue="minValueSlider"
         :maxValue="maxValueSlider"
         :step="this.distribution.type === 'Discrete' ? 1 : 0.01"
         @value-changed="updateResult"
     />
-    <ResultWithRipple :accent-color="accentColor" :result="result"/>
+<!--
+    <DoubleSliderLibrary
+      :type="this.distribution.type === 'Discrete' ? 1 : -1"
+      :step="this.distribution.type === 'Discrete' ? 1 : 0.01"
+      :minValue="minValueSlider"
+      :maxValue="maxValueSlider"
+      @slider-changed="updateResult"
+    />
+-->
+
+    <ResultWithRipple  :result="result"/>
   </div>
 
 </template>
@@ -41,12 +48,13 @@ import ContinueChart from "./ContinueChart";
 import MyDoubleRangeSlider from "./myDoubleRangeSlider";
 import ExtraData from "./ExtraData";
 import ResultWithRipple from "./ResultWithRipple";
+//import DoubleSliderLibrary from "./DoubleSliderLibrary";
 //import SliderTest from "./sliderTest";
 export default {
   name: "Graph",
-  components: {ResultWithRipple, ExtraData, MyDoubleRangeSlider, myChart,ContinueChart},
+  components: {MyDoubleRangeSlider, ResultWithRipple, ExtraData, myChart,ContinueChart},
   data: () => ({
-    sliderValues:[],
+    sliderValues:[0,0],
     result:0,
     coloredBars:[],
   }),
@@ -102,12 +110,6 @@ export default {
       res = b - a
       return res
     },
-    accentColor(){
-      return{
-        '--accent-color': this.distribution.color,
-        '--accent-color-lighter': this.distribution.accentColor
-      }
-    },
 
     chartDataDiscrete: function () {
       let toRet = [];
@@ -120,8 +122,8 @@ export default {
 
     chartLabelsDiscrete: function () {
 
-      const lowerValue = Math.floor(this.distribution.lowerValue(this.inputs))
-      const upperValue = Math.floor(this.distribution.upperValue(this.inputs))
+      const lowerValue = Math.ceil(this.distribution.lowerValue(this.inputs))
+      const upperValue = Math.ceil(this.distribution.upperValue(this.inputs))
 
       if (this.inputs === -1) return 0;
 
@@ -209,12 +211,17 @@ export default {
     },
 
     minValueSlider: function(){
+      if(this.inputs === -1)
+        return 1
       let lower = this.distribution.lowerValue(this.inputs)
-      return this.distribution.type === 'Discrete' ? Math.floor(lower) : lower.toFixed(2)
+      return this.distribution.type === 'Discrete' ? +Math.floor(lower) : +lower.toFixed(2)
     },
     maxValueSlider: function (){
+
+      if(this.inputs === -1)
+        return 1
       let upper = this.distribution.upperValue(this.inputs)
-      return this.distribution.type === 'Discrete' ? Math.floor(upper) : upper.toFixed(2)
+      return this.distribution.type === 'Discrete' ? +Math.floor(upper) : +upper.toFixed(2)
     }
 
   },

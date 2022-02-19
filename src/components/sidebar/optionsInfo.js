@@ -362,12 +362,12 @@ const userOptions = [
         F:(inputs, x) => {
             // z = x.xx
             let z = ((x - inputs[0])/ inputs[1]).toFixed(2)
-
+            //console.log(z)
             //console.log(Math.floor(+z * 10) )
             //console.log(Math.floor((z * 100) % 10))
             if(z < 0){
-                z = z * -1
-                return 1 - standardNormal[Math.floor(+z * 10) ][Math.floor((z * 100) % 10)]
+                z = +z * -1
+                return 1 - standardNormal[+Math.floor(+z * 10) ][+Math.floor((z * 100) % 10)]
             }
             return standardNormal[Math.floor(+z * 10) ][Math.floor((z * 100) % 10)]
         },

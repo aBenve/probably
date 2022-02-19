@@ -1,5 +1,5 @@
 <template>
-  <main-layout/>
+    <main-layout/>
 </template>
 
 <script>
@@ -28,9 +28,12 @@ export default {
   font-family: Quicksand, Poppins, Helvetica, Arial, sans-serif;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
 }
 html {
   overflow-x: hidden;
+  background-color: var(--gray-bg);
+
 }
 ::-webkit-scrollbar {
   width: 8px;
@@ -43,7 +46,7 @@ html {
   margin-bottom: 0.5rem;
 
 
-  background: var(--text-gray);
+  background: #2f3134;
   border-radius: 100px;
 }
 

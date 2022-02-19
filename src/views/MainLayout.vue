@@ -1,5 +1,5 @@
 <template>
-  <div class="bg  flex-row lg:flex h-screen w-screen p-5 md:pr-0 sm:pr-0 justify-between overflow-y-auto md:overflow-hidden">
+  <div class="bg  flex-row lg:flex h-screen w-screen p-5 md:pr-0 justify-between  md:overflow-hidden">
     <SidebarPanel />
     <div class="w-full h-full flex flex-col lg:flex-row md:overflow-y-auto">
       <router-view v-slot="{Component}" >
@@ -24,9 +24,7 @@ export default {
 
 <style scoped>
 
-.bg{
-  background-color: var(--gray-bg)
-}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity .2s ease-in-out;
