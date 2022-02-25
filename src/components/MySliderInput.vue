@@ -1,14 +1,10 @@
 <template>
-  <div class="mt-5" style="{
-    .test{
-      --accent-color: black;
-    }
-  }">
+  <div class="mt-5" >
     <div class="flex flex-row items-center justify-between mb-5">
       <div class="text-lg font-medium">
         {{ label }}
       </div>
-      <div class="text-lg font-bold num-data px-5 py-3 rounded-full ">
+      <div class="text-lg font-bold num-data px-4 py-3 rounded-full flex ">
         <input type="number" :min="minValue" :max="maxValue" v-model="value" class="num-input focus:outline-none bg-transparent w-full">
       </div>
     </div>
@@ -28,10 +24,9 @@
         </button>
       </span>
 
+      <input type="range" :step="step" class="w-full cursor-pointer slider mb-5 transition duration-1000 ease-in-out" :min="minValue" :max="maxValue" v-model="value"/>
       <!--
-      <input type="range" :step="step" class="w-full cursor-pointer slider mb-5 tap:transition duration-1000 ease-in-out" :min="minValue" :max="maxValue" v-model="value"/>
 
-      -->
       <Slider
           :step="step"
           :lazy="false"
@@ -39,7 +34,6 @@
           :min="minValue"
           :max="maxValue"
           :tooltips="false"
-
           style="{
             --slider-handle-ring-width: 3px;
 
@@ -54,20 +48,21 @@
           }"
 
       />
+            -->
+
     </div>
   </div>
 </template>
 <script>
-import Slider from '@vueform/slider'
+//import Slider from '@vueform/slider'
 import {mapGetters} from "vuex";
 
 export default {
   name: 'mySliderInput',
-  components: {Slider},
+  components: {},
   data: function (){
     return{
       value: this.prevValue,
-      colorTest: "#461234"
     }
   },
 
@@ -89,10 +84,12 @@ export default {
     },
   },
 
+
   computed:{
     ...mapGetters([
       'getCurrentOption',
     ]),
+
   },
 
   methods:{
@@ -101,14 +98,14 @@ export default {
         this.value = 0
       if(+this.value + +n > this.maxValue)
         return
-      this.value = +this.value +  +n
+      this.value = (+this.value +  +n).toFixed(3)
     },
     decreaseValue(n){
       if(this.value === "0")
         this.value = 0
-      if(+this.value - +n < 0)
+      if(+this.value - +n < 0 || +this.value - +n < this.minValue)
         return
-      this.value = +this.value -  +n
+      this.value = (+this.value -  +n).toFixed(3)
     }
   },
 
@@ -119,6 +116,10 @@ export default {
     maxValue: function (){
       if(this.value > this.maxValue)
         this.value = this.maxValue
+    },
+    minValue:function (){
+      if(this.value < this.minValue)
+        this.value = this.minValue
     },
     prevValue: function (){
       return this.value = this.prevValue
@@ -140,13 +141,7 @@ export default {
 </style>
 <style scoped>
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button
-{
-  -webkit-appearance: none;
-  margin: 0;
-  outline: none;
-}
+
 .change-value-buttons{
   transition: 0.2s ease-in-out;
 }
@@ -162,7 +157,8 @@ input[type=number]::-webkit-outer-spin-button
   right: 0;
   bottom: -2rem;
 }
-
+.num-input{
+}
 .has-tooltip:hover .tooltip {
   @apply visible z-50;
   opacity: 1;
@@ -178,7 +174,8 @@ input[type=number]::-webkit-outer-spin-button
 .num-data{
   background-color: #252525;
   color: var(--accent-color);
-  width: 5.5rem;
+  min-width: 5.5rem;
+  max-width: 5.5rem; /* todo: may be changed */
   box-shadow: inset 0 0 0 0px var(--accent-color);
   transition: 0.2s ease-in-out;
 }
@@ -187,9 +184,6 @@ input[type=number]::-webkit-outer-spin-button
   box-shadow: inset 0 0 0 2px var(--accent-color);
 }
 
-.slider::-webkit-slider-runnable-track:hover {
-  opacity: 1;
-}
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -198,8 +192,9 @@ input[type=number]::-webkit-outer-spin-button
   height: 25px;
   border-radius: 50%;
   border: 3px solid var(--accent-color);
-  background: #252525;
+  background: var(--black-darker);
   cursor: pointer;
+  /*transform: translate(0,-7.5px);*/
   box-shadow: -510px 0 0 500px var(--accent-color);
   transition: 0.5s ease-in-out;
 }
@@ -213,6 +208,41 @@ input[type=number]::-webkit-outer-spin-button
 .slider::-webkit-slider-runnable-track {
   overflow: hidden;
   border-radius: 50px;
+  /*height: 10px;*/
+  transition: 0.5s ease-in-out;
+}
+
+.slider::-webkit-slider-runnable-track:hover {
+  opacity: 1;
+}
+
+
+.slider::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-color);
+  background: #252525;
+  cursor: pointer;
+  box-shadow: -510px 0 0 500px var(--accent-color);
+  transition: 0.5s ease-in-out;
+}
+
+.slider::-moz-range-thumb:hover {
+  border: 3px solid var(--accent-color-lighter);
+  box-shadow: -510px 0 0 500px var(--accent-color-lighter);
+
+}
+
+.slider::-moz-range-track {
+  overflow: hidden;
+  border-radius: 50px;
+}
+
+.slider::-moz-range-track:hover {
+  opacity: 1;
 }
 
 </style>

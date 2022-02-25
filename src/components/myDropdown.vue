@@ -57,8 +57,15 @@ export default {
 }
 </script>
 <style scoped>
+/*
 .active{
   background: rgba(60, 60, 60, 0.3);
+
+}
+ */
+.active{
+  background:  rgba(37, 37, 37, 0.7);
+
 }
 .dropdown-active{
   font-weight: 700;

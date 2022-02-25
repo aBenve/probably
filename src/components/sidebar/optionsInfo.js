@@ -47,21 +47,18 @@ let GeometricUpperValue = (inputs) => {
     2 -> N
  */
 let HypergeometricMean = (inputs) => {
-    return inputs[0] * inputs[1] / inputs[2]
+    return inputs[0] * inputs[2] / inputs[1]
 }
 let HypergeometricVariance = (inputs) => {
-    return inputs[0] * inputs[1] / inputs[2] * (1- inputs[1]/inputs[2])*(inputs[2]-inputs[0])/(inputs[2]-1)
+    return inputs[0] * inputs[2] / inputs[1] * (1 - inputs[2] / inputs[1]) * (inputs[1] - inputs[0]) / (inputs[1] - 1)
 }
 
 let HypereometricLowerValue = (inputs) => {
-    return Math.max(1, GeometricMean(inputs) - 5 * generalSD(GeometricVariance(inputs)))
+    return Math.max(0, inputs[0] - (inputs[1] - inputs[2]))
 }
 
 let HypereometricUpperValue = (inputs) => {
-    let lower = GeometricLowerValue(inputs)
-    let toRet = Math.ceil(GeometricMean(inputs) + 5 * generalSD(GeometricVariance(inputs)))
-    if(toRet - lower < 4) return lower + 4
-    return toRet
+    return Math.min(inputs[0], inputs[2])
 }
 
 let PoissonMean = (inputs) => {
@@ -213,13 +210,13 @@ const userOptions = [
         upperValue:(inputs) => { return HypereometricUpperValue(inputs)},
 
         P:(inputs, x) => {
-            return (combinations(inputs[1], x) * combinations(inputs[2] - inputs[1], inputs[2]-x)/combinations(inputs[2],inputs[0]))
+            return (combinations(inputs[2], x) * combinations(inputs[1] - inputs[2], inputs[0]-x)/combinations(inputs[1],inputs[0]))
         },
 
         color:"#FE9494",
         accentColor:"#FE6767",
         type: "Discrete",
-        related: false,
+        related: "Hypergeometric", //caso especial
         inputs: [{label:"Sample size", step:1, value:0, max:500}, {label:"Total number of objects", step:1, value: 0, max:500}, {label:"Amount of successes", step:1, value: 0, max:500}],
         description: {
             directions: "Enter the size of the sample (n), total number of objects (N) and the number of successes (M) and select a number or a range for the amount of times that event you want to know the probability (x value on the chart)",
@@ -329,7 +326,7 @@ const userOptions = [
         accentColor:"#67B6FE",
         type: "Continuous",
         related: false,
-        inputs: [{label:"λ ratio", step:0.01, value: 0, max:200}],
+        inputs: [{label:"λ ratio", step:0.001, value: 0, max:200}],
         description: {
             directions: " abd select a range for more precise information (x value on the chart)",
             equations: [
@@ -376,7 +373,7 @@ const userOptions = [
         accentColor:"#67FEE3",
         type: "Continuous",
         related: false,
-        inputs: [{label:"Mean μ", step:1, value: 0, max:500}, {label:"Standard deviation σ", step: 0.01, value: 0, max:100}],
+        inputs: [{label:"Mean μ", step:0.001, value: 0, max:500}, {label:"Standard deviation σ", step: 0.001, value: 0, max:100}],
         description: {
             directions: "Select the mean (μ) and the standard deviation (σ) and select a range for more precise information (x value on the chart)",
             equations: [

@@ -1,12 +1,13 @@
 <template>
   <!-- <div class="w-full flex flex-col xl:flex-row p-0 sm:pr-5"> -->
-  <div class="w-full flex flex-col xl:flex-row px-0 md:pr-5  lg:pl-5 xl:space-x-5 space-x-0 ">
+  <div class="w-full h-full flex flex-col xl:flex-row px-0 md:pr-5  lg:pl-5 xl:space-x-5 space-x-0 ">
   <!--<div class="flex flex-col p-0 lg:p-5 lg:pl-0  mb-5 lg:mb-0  xl:w-4/6 lg:w-full">-->
-    <div class="flex flex-col p-0   mb-5 lg:mb-0  xl:w-4/6 lg:w-full">
+    <div class="flex flex-col p-0 mb-5 lg:mb-0  xl:w-4/6 lg:w-full  xl:overflow-y-auto xl:pr-5">
       <InputArea :distribution="distribution" @value-changed="this.updateInputs"/>
       <DataArea v-if="windowSize" :distribution="distribution" :style='accentColor'/>
     </div>
     <Graph :style='accentColor' />
+
     <DataArea v-if="!windowSize"  :distribution="distribution" :style='accentColor' class="mb-10"/>
   </div>
 </template>

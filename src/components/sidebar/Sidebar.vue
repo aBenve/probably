@@ -1,5 +1,5 @@
 <template>
-      <div class="rounded-2xl overflow-x-hidden sidebar flex flex-col justify-between h-full p-2">
+      <div class="rounded-2xl overflow-x-hidden sidebar flex flex-col justify-between h-full p-4">
         <div class="flex flex-col align-center">
           <div class="flex flex-row justify-center p-4">
             <router-link to="/">

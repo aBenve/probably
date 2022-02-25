@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center w-full mt-5">
+  <div class="flex justify-center items-center w-full ">
     <div>
       <ripple-button :style="accentColor">
         <div class="text-2xl result px-4 rounded-full  flex justify-center  "

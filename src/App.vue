@@ -61,4 +61,11 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--black-darker);
 }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+  -webkit-appearance: none;
+  margin: 0;
+  outline: none;
+}
 </style>

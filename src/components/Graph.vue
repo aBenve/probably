@@ -1,15 +1,23 @@
 <template>
-  <div class="rounded-2xl graph p-5 w-full flex-col justify-center">
+  <div class="rounded-2xl graph p-5 w-full flex-col justify-center min-h-full overflow-y-auto">
     <!--<SliderTest/> -->
     <ExtraData/>
 
-    <myChart
 
-        v-if="distribution.type === 'Discrete'"
+
+    <!-- Si armo mas botones, estaria bueno que sea en un componente de menu con todas las opciones disponibles pero deshabilitadas las no permitidas.-->
+    <div class="my-2">
+      <toggle-button v-if="this.distribution.type === 'Discrete'" tittle="Fix sliders" @triggered="fixSliders = !fixSliders"/>
+    </div>
+
+    <myChart
+      v-if="distribution.type === 'Discrete'"
 
       :chartData="chartDataDiscrete"
       :labels="chartLabelsDiscrete"
       :color="getColoredBars"
+
+
     />
     <ContinueChart
         v-if="distribution.type === 'Continuous'"
@@ -19,12 +27,29 @@
         :labels="chartLabelsContinuous"
         :border-color="getColoredBars"
         :bg-color="distribution.color"
+
+
     />
-    <MyDoubleRangeSlider
-        :minValue="minValueSlider"
-        :maxValue="maxValueSlider"
+      <MyDoubleRangeSlider
+
+          v-if="!fixSliders"
+
+          :minValue="minValueSlider"
+          :maxValue="maxValueSlider"
+          :step="this.distribution.type === 'Discrete' ? 1 : 0.01"
+
+          @value-changed="updateResult"
+          class=" ml-10"
+      />
+    <SingleSliderSelector
+
+        v-if="fixSliders"
+        :min="minValueSlider"
+        :max="maxValueSlider"
         :step="this.distribution.type === 'Discrete' ? 1 : 0.01"
         @value-changed="updateResult"
+
+        class=""
     />
 <!--
     <DoubleSliderLibrary
@@ -35,8 +60,8 @@
       @slider-changed="updateResult"
     />
 -->
+    <ResultWithRipple  :result="result" class="my-5"/>
 
-    <ResultWithRipple  :result="result"/>
   </div>
 
 </template>
@@ -48,15 +73,20 @@ import ContinueChart from "./ContinueChart";
 import MyDoubleRangeSlider from "./myDoubleRangeSlider";
 import ExtraData from "./ExtraData";
 import ResultWithRipple from "./ResultWithRipple";
+import ToggleButton from "./ToggleButton";
+import SingleSliderSelector from "./SingleSliderSelector";
 //import DoubleSliderLibrary from "./DoubleSliderLibrary";
 //import SliderTest from "./sliderTest";
 export default {
   name: "Graph",
-  components: {MyDoubleRangeSlider, ResultWithRipple, ExtraData, myChart,ContinueChart},
+  components: {
+    SingleSliderSelector,
+    ToggleButton, MyDoubleRangeSlider, ResultWithRipple, ExtraData, myChart,ContinueChart},
   data: () => ({
     sliderValues:[0,0],
     result:0,
     coloredBars:[],
+    fixSliders: false
   }),
   computed: {
     ...mapGetters({
@@ -244,5 +274,11 @@ export default {
 
 .graph{
   background-color: var(--black-principal);
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s ease-in-out;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0
 }
 </style>

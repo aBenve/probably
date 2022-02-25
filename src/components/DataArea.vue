@@ -5,7 +5,7 @@
         {{ distribution.description.directions}}
       </div>
 
-      <div class="flex-col flex ">
+      <div class="flex-col flex mb-10">
         <div class="flex-col text-lg">
           <div class=" subtitle">
             Density function
