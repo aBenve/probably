@@ -1,5 +1,5 @@
 <template>
-  <div class="my-5 ml-10 pr-8 container">
+  <div class="my-5 flex-col  container">
     <input
         type="range"
         :step="step"
@@ -39,7 +39,7 @@ export default {
 
 <style scoped>
 .container{
-  width: 98%;
+  width: 100%;
 }
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */

@@ -45,7 +45,11 @@ export default defineComponent({
       legend: {
         display: true
       },
-
+      scales: {
+        y: {
+          alignToPixels:true
+        }
+      }
     }
 
     const testData = computed(() => ({

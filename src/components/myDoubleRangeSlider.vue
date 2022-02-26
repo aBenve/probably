@@ -35,8 +35,8 @@
               right: (100 - coveredAreaRight - +adjustPercentage)  + '%'
             }">
           </div>
-          <div ref="thumb-left" class="thumb left" :style="{left: coveredAreaLeft + '%'}"></div>
-          <div ref="thumb-right" class="thumb right" :style="{right: (100 - coveredAreaRight) + '%'}"></div>
+          <div ref="thumb-left" class="thumb left" :style="{left: coveredAreaLeft  + '%'}"></div>
+          <div ref="thumb-right" class="thumb right" :style="{right: (100 - coveredAreaRight ) + '%'}"></div>
         </div>
 
       </div>

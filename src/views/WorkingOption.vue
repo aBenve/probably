@@ -6,8 +6,14 @@
       <InputArea :distribution="distribution" @value-changed="this.updateInputs"/>
       <DataArea v-if="windowSize" :distribution="distribution" :style='accentColor'/>
     </div>
-    <Graph :style='accentColor' />
-
+    <div class="flex flex-col min-h-full xl:w-4/6">
+      <Graph :style='accentColor' />
+      <div class="flex flex-1 p-5 mt-5 rounded-2xl test-bg">
+        <div class="text-red-50">
+          testing space for user history
+        </div>
+      </div>
+    </div>
     <DataArea v-if="!windowSize"  :distribution="distribution" :style='accentColor' class="mb-10"/>
   </div>
 </template>
@@ -87,6 +93,8 @@ export default {
 </script>
 
 <style>
-
+.test-bg{
+  background-color: var(--black-principal);
+}
 
 </style>

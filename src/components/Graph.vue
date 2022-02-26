@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-2xl graph p-5 w-full flex-col justify-center min-h-full overflow-y-auto">
+  <div class="rounded-2xl graph p-5 w-full flex-col justify-center  overflow-y-auto">
     <!--<SliderTest/> -->
     <ExtraData/>
 
@@ -10,56 +10,58 @@
       <toggle-button v-if="this.distribution.type === 'Discrete'" tittle="Fix sliders" @triggered="fixSliders = !fixSliders"/>
     </div>
 
-    <myChart
-      v-if="distribution.type === 'Discrete'"
+    <div class="">
+      <myChart
+        v-if="distribution.type === 'Discrete'"
 
-      :chartData="chartDataDiscrete"
-      :labels="chartLabelsDiscrete"
-      :color="getColoredBars"
+        :chartData="chartDataDiscrete"
+        :labels="chartLabelsDiscrete"
+        :color="getColoredBars"
+
+      />
+      <ContinueChart
+          v-if="distribution.type === 'Continuous'"
+
+          :chartData="charDataContinuous"
+          :chartDistributionData="chartDistributionDataContinuous"
+          :labels="chartLabelsContinuous"
+          :border-color="getColoredBars"
+          :bg-color="distribution.color"
 
 
-    />
-    <ContinueChart
-        v-if="distribution.type === 'Continuous'"
+      />
+        <MyDoubleRangeSlider
 
-        :chartData="charDataContinuous"
-        :chartDistributionData="chartDistributionDataContinuous"
-        :labels="chartLabelsContinuous"
-        :border-color="getColoredBars"
-        :bg-color="distribution.color"
+            v-if="!fixSliders"
 
+            :minValue="minValueSlider"
+            :maxValue="maxValueSlider"
+            :step="this.distribution.type === 'Discrete' ? 1 : 0.01"
 
-    />
-      <MyDoubleRangeSlider
+            @value-changed="updateResult"
+            class="ml-8"
+        />
+      <SingleSliderSelector
 
-          v-if="!fixSliders"
+          v-if="fixSliders"
+          :min="minValueSlider"
+          :max="maxValueSlider"
+          :step="this.distribution.type === 'Discrete' ? 1 : 0.01"
+          @value-changed="updateResult"
 
+          class="pl-8 "
+      />
+    </div>
+
+    <!--
+        <DoubleSliderLibrary
+          :type="this.distribution.type === 'Discrete' ? 1 : -1"
+          :step="this.distribution.type === 'Discrete' ? 1 : 0.01"
           :minValue="minValueSlider"
           :maxValue="maxValueSlider"
-          :step="this.distribution.type === 'Discrete' ? 1 : 0.01"
-
-          @value-changed="updateResult"
-          class=" ml-10"
-      />
-    <SingleSliderSelector
-
-        v-if="fixSliders"
-        :min="minValueSlider"
-        :max="maxValueSlider"
-        :step="this.distribution.type === 'Discrete' ? 1 : 0.01"
-        @value-changed="updateResult"
-
-        class=""
-    />
-<!--
-    <DoubleSliderLibrary
-      :type="this.distribution.type === 'Discrete' ? 1 : -1"
-      :step="this.distribution.type === 'Discrete' ? 1 : 0.01"
-      :minValue="minValueSlider"
-      :maxValue="maxValueSlider"
-      @slider-changed="updateResult"
-    />
--->
+          @slider-changed="updateResult"
+        />
+    -->
     <ResultWithRipple  :result="result" class="my-5"/>
 
   </div>
