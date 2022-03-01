@@ -62,7 +62,7 @@
           @slider-changed="updateResult"
         />
     -->
-    <ResultWithRipple  :result="result" class="my-2"/>
+    <ResultWithRipple  :result="result" class="my-5"/>
 
   </div>
 

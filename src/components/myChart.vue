@@ -32,9 +32,9 @@ export default defineComponent({
 
     const options = {
       responsive: true,
-      maintainAspectRatio: true,
+      maintainAspectRatio: false,
       animation: {
-        easing: 'linear',
+        easing: 'ease',
         duration: 500
       },
       elements: {

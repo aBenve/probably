@@ -6,15 +6,16 @@
       <InputArea :distribution="distribution" @value-changed="this.updateInputs"/>
       <DataArea v-if="windowSize" :distribution="distribution" :style='accentColor'/>
     </div>
-    <div class="flex flex-col min-h-full w-full ">
-      <Graph :style='accentColor' class="flex-1 overflow-y-auto" />
-      <div class="flex flex-1 p-5 mt-5 rounded-2xl test-bg max-h-20">
-        <div class="text-red-50">
-          testing space for user history
+    <!-- Fix this layout when history is finished-->
+    <div class="flex flex-col min-h-full w-full">
+        <Graph :style='accentColor' class="flex-1 xl:overflow-y-auto" />
+        <div class="flex flex-1 p-5 mt-5 rounded-2xl test-bg max-h-20">
+          <div class="text-red-50">
+            Testing space for user history
+          </div>
         </div>
-      </div>
+      <DataArea v-if="!windowSize"  :distribution="distribution" :style='accentColor' class="mb-10"/>
     </div>
-    <DataArea v-if="!windowSize"  :distribution="distribution" :style='accentColor' class="mb-10"/>
   </div>
 </template>
 
