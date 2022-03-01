@@ -27,10 +27,7 @@ export default {
 .button{
   opacity: 0.7;
   box-shadow: 0 0 10px 5px var(--black-principal);
-  transition: all 0.5s ease-in;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+
 }
 
 @keyframes gradient {
