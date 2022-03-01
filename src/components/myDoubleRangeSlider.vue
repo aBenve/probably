@@ -251,6 +251,15 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
 
 }
+input[type=range]::-moz-range-thumb {
+  pointer-events: all;
+  width: 25px;
+  height: 25px;
+  border-radius: 0;
+  border: 0 none;
+  background-color: red;
+  cursor: pointer;
 
+}
 
 </style>

@@ -216,12 +216,10 @@ export default {
   opacity: 1;
 }
 
-
 .slider::-moz-range-thumb {
-  -webkit-appearance: none;
   appearance: none;
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   border: 3px solid var(--accent-color);
   background: #252525;
@@ -235,10 +233,12 @@ export default {
   box-shadow: -510px 0 0 500px var(--accent-color-lighter);
 
 }
-
-.slider::-moz-range-track {
+/* ojo, este era solo de moz */
+.slider{
   overflow: hidden;
   border-radius: 50px;
+  /*height: 10px;*/
+  transition: 0.5s ease-in-out;
 }
 
 .slider::-moz-range-track:hover {

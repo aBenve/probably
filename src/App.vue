@@ -61,8 +61,6 @@ html {
 ::-webkit-scrollbar-track {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-
-
   background: #2f3134;
   border-radius: 100px;
 }
@@ -85,4 +83,9 @@ input[type=number]::-webkit-outer-spin-button
   margin: 0;
   outline: none;
 }
+
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
 </style>
