@@ -141,6 +141,6 @@ export default {
   color: var(--text-gray);
 }
 .graph{
-  background-color: #272A2E;
+  background-color: var(--black-principal);
 }
 </style>

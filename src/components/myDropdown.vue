@@ -1,5 +1,5 @@
 <template>
-  <button @click="toggle = !toggle" :class="toggle? 'active rounded-2xl' : ''">
+  <button class="w-full" @click="toggle = !toggle" :class="toggle? 'active rounded-2xl' : ''">
     <div :class="toggle ? 'dropdown-active':'drop-options'" class=" mb-4  rounded-2xl p-2 px-4 text-lg font-medium transition duration-75 ease-in">
       <div class="flex flex-row justify-between items-center">
 
@@ -19,10 +19,10 @@
     </div>
     <transition name="slideBottom">
       <div  v-if="toggle" >
-        <div class="mb-2 drop-options-menu rounded-2xl text-sm  font-medium transition duration-75 ease-in mx-2" v-for="option in menu" :key="option">
-          <router-link  class="flex align-middle justify-center" :to="option.name" @click="this.$emit('dropDown-option-clicked')">
+        <div class="mb-2 drop-options-menu rounded-2xl text-sm  font-medium transition duration-75 ease-in mx-2" v-for="option in options" :key="option">
+          <router-link  class="flex align-middle justify-center" :to="`/dashboard/${option}`" @click="this.$emit('dropDown-option-clicked')">
             <div class="w-full h-full p-2">
-              {{ option.name }}
+              {{ option }}
             </div>
           </router-link>
         </div>
@@ -31,7 +31,6 @@
   </button>
 </template>
 <script>
-import userData from "./sidebar/optionsInfo"
 
 export default {
   name: 'myDropdown',
@@ -43,17 +42,13 @@ export default {
       mainIcon:{
         type:String,
         require: false
-      }
+      },
+    options:Object
 
   },
   data:() => ({
     toggle: false,
   }),
-  computed:{
-    menu: function (){
-      return userData.filter(obj => obj.type === this.name)
-    }
-  },
 }
 </script>
 <style scoped>

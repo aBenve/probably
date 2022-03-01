@@ -150,8 +150,8 @@ export default {
 .num-data{
   background-color: var(--black-darker);
   color: var(--accent-color, red);
-  min-width: 5.5rem;
-  max-width: 6.5rem;
+  min-width: 6rem;
+  max-width: 6rem;
   box-shadow: inset 0 0 0 0px var(--accent-color, red);
   transition: 0.2s ease-in-out;
 }

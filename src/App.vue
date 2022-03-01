@@ -1,17 +1,34 @@
 <template>
-    <main-layout/>
+    <!-- <main-layout/> -->
+  <router-view v-slot="{Component}">
+    <transition name="fade" mode="out-in">
+      <component :is="Component" :key="$route.path"/>
+    </transition>
+  </router-view>
 </template>
 
 <script>
 
-import MainLayout from "./views/MainLayout";
+//import MainLayout from "./views/MainLayout";
 export default {
   name: "App",
-  components: {MainLayout},
+  components: {},
 
 };
 </script>
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease-in-out;
+}
 
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+</style>
 <style>
 
 :root{

@@ -1,5 +1,5 @@
 <template>
-<button class="py-2 px-4 rounded-full transition duration-500 ease-in-out" :class="triggered ? 'active' : 'no-active'" @click="triggered = !triggered">
+<button :disabled="disable" class="py-2 px-4 rounded-full transition duration-500 ease-in-out" :class="triggered ? 'active' : 'no-active'" @click="triggered = !triggered">
   <span class="text-lg font-medium">{{tittle}}</span>
 </button>
 </template>
@@ -8,7 +8,8 @@
 export default {
   name: "ToggleButton",
   props:{
-    tittle:String
+    tittle:String,
+    disable: Boolean
   },
   data: () => ({
     triggered: false

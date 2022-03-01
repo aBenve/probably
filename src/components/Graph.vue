@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-2xl graph p-5 w-full flex-col justify-center  overflow-y-auto">
+  <div class="rounded-2xl graph p-5 w-full flex-col justify-center ">
     <!--<SliderTest/> -->
     <ExtraData/>
 
@@ -7,7 +7,7 @@
 
     <!-- Si armo mas botones, estaria bueno que sea en un componente de menu con todas las opciones disponibles pero deshabilitadas las no permitidas.-->
     <div class="my-2">
-      <toggle-button v-if="this.distribution.type === 'Discrete'" tittle="Fix sliders" @triggered="fixSliders = !fixSliders"/>
+      <toggle-button :disable="this.distribution.type === 'Continuous'" tittle="Fix sliders" @triggered="fixSliders = !fixSliders"/>
     </div>
 
     <div class="">
@@ -62,7 +62,7 @@
           @slider-changed="updateResult"
         />
     -->
-    <ResultWithRipple  :result="result" class="my-5"/>
+    <ResultWithRipple  :result="result" class="my-2"/>
 
   </div>
 

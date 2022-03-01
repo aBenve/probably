@@ -174,8 +174,8 @@ export default {
 .num-data{
   background-color: #252525;
   color: var(--accent-color);
-  min-width: 5.5rem;
-  max-width: 5.5rem; /* todo: may be changed */
+  min-width: 6rem;
+  max-width: 6rem; /* todo: may be changed */
   box-shadow: inset 0 0 0 0px var(--accent-color);
   transition: 0.2s ease-in-out;
 }

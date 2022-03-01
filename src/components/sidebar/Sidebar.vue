@@ -2,19 +2,22 @@
       <div class="rounded-2xl overflow-x-hidden sidebar flex flex-col justify-between h-full p-4">
         <div class="flex flex-col align-center">
           <div class="flex flex-row justify-center p-4">
-            <router-link to="/">
+            <router-link to="/dashboard">
               <div >
                 <img class="zoom " src="../../assets/proABly-new.svg" alt="probably" height="10" width="150" />
               </div>
             </router-link>
           </div>
           <br/>
-          <my-dropdown class="my-1" name="Discrete" mainIcon="chart-bar" @dropDown-option-clicked="this.$emit('dropDown-option-clicked')"/>
-          <my-dropdown class="my-1" name="Continuous" mainIcon="chart-area" @dropDown-option-clicked="this.$emit('dropDown-option-clicked')"/>
-
+          <div v-for="option in options" :key="option" class="">
+            <div v-if="option.children === undefined">option.tittle</div>
+            <my-dropdown v-if="option.children.length > 0" class="my-1 " :name="option.title" :mainIcon="option.icon" :options="option.children" @dropDown-option-clicked="this.$emit('dropDown-option-clicked')"/>
+          </div>
         </div>
-        <div class="text-gray-500">
-          version 1.0
+        <div class="text-gray-500 hover:text-white transform duration-75 ease-out">
+          <router-link to="/">
+            Go back
+          </router-link>
         </div>
       </div>
 </template>
@@ -26,6 +29,31 @@ import MyDropdown from "../myDropdown";
 export default {
   name: "Sidebar",
   components: {MyDropdown},
+  data: () => ({
+    options: [
+        {
+          title: 'Discrete',
+          icon:'chart-bar',
+          children: [
+              'Binomial',
+              'Geometric',
+              'Hypergeometric',
+              'Poisson'
+          ]
+        },
+        {
+          title: 'Continuous',
+          icon:'chart-area',
+          children: [
+            'Uniform',
+            'Exponential',
+            'Normal',
+            'Log-Normal',
+            'Student t'
+          ]
+        }
+    ]
+  })
 
 }
 </script>
