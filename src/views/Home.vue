@@ -1,11 +1,11 @@
 <template>
   <div class="w-full flex flex-col lg:flex-row p-0 sm:pr-5 ">
     <div class="rounded-2xl p-0 lg:p-5 mb-5 lg:mb-0  lg:w-11/12 text-2xl flex flex-col" >
-      <div class="md:text-4xl text-xl text-white font-bold mb-5">
+      <div class="md:text-4xl text-3xl text-white font-bold ">
         News
       </div>
       <div class=" overflow-y-auto">
-        <div class="mt-10 text-white font-medium">
+        <div class="mt-5 text-white font-medium">
           (28/1)
         </div>
         <ul class="common-text text-lg mt-2">

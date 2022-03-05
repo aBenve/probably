@@ -48,8 +48,6 @@ export default {
             'Uniform',
             'Exponential',
             'Normal',
-            'Log-Normal',
-            'Student t'
           ]
         }
     ]
